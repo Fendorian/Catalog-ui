@@ -17,42 +17,39 @@ $(document).ready(function() {
     })
     let mainCards = document.querySelector('.main-wrapper');
 });
-function UbacitiGradjana() {
+function ubacitiGradjana() {
     console.log('radi ubacaj');
-    $("#create-item-form").submit(function(event) {
-        event.preventDefault();
-
-        var formData = {
-            ID: $("#InsertID").val(),
-            Ime: $("#InsertIme").val(),
-            Prezime: $("#InsertPrezime").val(),
-            StrucnaSprema: $("#InsertStrucnaSprema").val(),
-            Plata: $("#InsertPlata").val(),
-            Struka: $("#InsertStruka").val(),
-            Slika: $("#InsertSlika").val(),
-            MesnaZajednica: $("#InsertMesnaZajednica").val()
-
-        };
-        //poslovno pravilo
-        if (parseInt($("#InsertPlata").val()) > 10000) {
-            alert("Error: Plata ne moze biti veca od 10 000.");
-            return;
+    document.querySelector('#create-item-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      var formData = {
+        ID: document.querySelector('#InsertID').value,
+        Ime: document.querySelector('#InsertIme').value,
+        Prezime: document.querySelector('#InsertPrezime').value,
+        StrucnaSprema: document.querySelector('#InsertStrucnaSprema').value,
+        Plata: document.querySelector('#InsertPlata').value,
+        Struka: document.querySelector('#InsertStruka').value,
+        Slika: document.querySelector('#InsertSlika').value,
+        MesnaZajednica: document.querySelector('#InsertMesnaZajednica').value
+      };
+  
+      // poslovno pravilo
+      if (parseInt(document.querySelector('#InsertPlata').value) > 10000) {
+        alert('Error: Plata ne moze biti veca od 10 000.');
+        return;
+      }
+  
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:/Gradjani/CreateGradjan');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          alert('Uspesno ste ubacili Gradjana');
+        } else {
+          console.log('Error: ' + xhr.statusText);
         }
-
-        $.ajax({
-            header: {
-                 'Access-Control-Allow-Origin': '*'
-            },
-            type: "POST",
-            url: "http://localhost:/Gradjani/CreateGradjan",
-            data: JSON.stringify(formData),
-            contentType: "application/json",
-            success: function() {
-                alert("Uspesno ste ubacili Gradjana");
-            },
-            error: function(xhr, status, error) {
-                console.log("Error: " + error + status);
-            }
-        });
+      };
+      xhr.send(JSON.stringify(formData));
     });
-}
+  }
