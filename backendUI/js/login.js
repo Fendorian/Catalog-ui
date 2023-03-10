@@ -79,7 +79,7 @@ var GetLogin = function () {
       alert(result);
       if (result === "Uspesno logovanje") {
         successSignIn();
-        window.location.replace("http://127.0.0.1:5501/index.html");
+        // window.location.replace("http://127.0.0.1:5501/index.html");
         let token = result.token;
         document.cookie = "token = " + token;
       } else {
