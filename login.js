@@ -1,7 +1,10 @@
 window.addEventListener("load", function() {
-    var myDiv = document.querySelector(".right-side");
+    let myDiv = document.querySelector(".right-side-login");
     myDiv.style.opacity = 1;
+
+    let transitionBackground = document.querySelector(".left-side")
   });
+
 
   var GetLogin = function() {
     var korisnickoime = document.getElementById('txtUsername').value;
