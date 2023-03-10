@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/login.css" />
   </head>
   <body>
     <div class="container login-container">
@@ -16,25 +16,72 @@
             data="/images/login/doorboy.svg"
             type="image/svg+xml"
           ></object>
+          <!-- <img class="doorboy-svg" src="/images/login/doorboy.svg" alt=""> -->
         </div>
       </div>
       <div class="right-side-login">
         <form class="form-container">
-            <div class="inner-form">
-                <div class="inner-form-top">
-                    <a class="inner-form-top-already" href="#">ALREADY MEMEBERS</a>
-                    <a class="inner-form-top-help" href="#">Need help?</a>
-                </div>
-                <div class="inner-form-bot">
-                    <input placeholder="Enter your username" class="inner-form-bot-input" type="text">
-                    <input placeholder="Enter your password" class="inner-form-bot-input" type="password">
-                    <button class="inner-form-bot-button">SIGN IN</button>
-                </div>
+          <div class="inner-form inner-form-login">
+            <div class="inner-form-top">
+              <a class="inner-form-top-already" href="#">ALREADY MEMEBERS</a>
+              <a class="inner-form-top-help" href="#">Forgot password?</a>
             </div>
-            <div class="outer-form">
-                <a class="outer-form-account" href="#">Don't have an account yet?</a>
-                <a class="outer-form-missing" href="#">Create an account</a>
+            <div class="inner-form-bot">
+              <input
+                placeholder="Enter your username"
+                class="inner-form-bot-input"
+                type="text"
+              />
+              <input
+                placeholder="Enter your password"
+                class="inner-form-bot-input"
+                type="password"
+              />
+              <button class="inner-form-bot-button" onclick="successSignIn();">LOG IN</button>
             </div>
+          </div>
+          <div class="inner-form inner-form-registration hidden">
+            <div class="inner-form-top">
+              <a class="inner-form-top-already" href="#">ALREADY MEMEBERS</a>
+              <a class="inner-form-top-help" href="#">Need help?</a>
+            </div>
+            <div class="inner-form-bot">
+              <input
+                placeholder="Enter your username"
+                class="inner-form-bot-input"
+                type="text"
+              />
+              <input
+                placeholder="Enter your email"
+                class="inner-form-bot-input"
+                type="email"
+              />
+              <input
+                placeholder="Enter your password"
+                class="inner-form-bot-input"
+                type="password"
+              />
+              <input
+                placeholder="Confirm your password"
+                class="inner-form-bot-input"
+                type="password"
+              />
+              <button class="inner-form-bot-button" onclick="successSignIn();">SIGN IN</button>
+            </div>
+          </div>
+          <div class="outer-form-login">
+            <a class="outer-form-account" href="#"
+              >Don't have an account yet?</a
+            >
+            <a class="outer-form-missing" href="#" onclick="toggle();">Create an account</a>
+          </div>
+          <div class="outer-form-registration">
+            <a class="outer-form-account" href="#"
+              >Have an account?</a
+            >
+            <a class="outer-form-missing" href="#" onclick="toggle();">Switch to login</a>
+          </div>
+
         </form>
       </div>
     </div>
