@@ -39,55 +39,99 @@ function revertToLogin() {
   }, 500);
 }
 function toggle() {
-  let loginInfo = document.querySelector('.outer-form-login');
-  let registerInfo = document.querySelector('.outer-form-registration');
-  if(login.style.display === "none"){
-     loginInfo.style.display = "flex";
-     registerInfo.style.display = "none";
+  let loginInfo = document.querySelector(".outer-form-login");
+  let registerInfo = document.querySelector(".outer-form-registration");
+  if (login.style.display === "none") {
+    loginInfo.style.display = "flex";
+    registerInfo.style.display = "none";
     console.log("1 je");
   } else {
-     loginInfo.style.display = "none";
-     registerInfo.style.display = "flex";
-    console.log('nije 1');
+    loginInfo.style.display = "none";
+    registerInfo.style.display = "flex";
+    console.log("nije 1");
   }
-  if (login.style.display === "none") {  
+  if (login.style.display === "none") {
     revertToLogin();
-    
   } else {
     shrinkAndShow();
-    
   }
 }
 
-var GetLogin = function () {
-  var korisnickoime = document.getElementById("txtUsername").value;
-  var sifra = document.getElementById("txtPassword").value;
-
-  console.log(korisnickoime);
-  var loginUrl = "http://localhost:/Gradjani/GetLogin";
-  var loginData = JSON.stringify({
-    KorisnickoIme: korisnickoime,
-    Sifra: sifra,
-  });
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", loginUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      var result = JSON.parse(xhr.responseText);
-      alert(result);
-      if (result === "Uspesno logovanje") {
-        successSignIn();
-        // window.location.replace("http://127.0.0.1:5501/index.html");
-        let token = result.token;
-        document.cookie = "token = " + token;
-      } else {
-        alert("Popunite sva polja!");
-      }
+function checkLogin(username, password) {
+  return fetch('http://localhost/Catalog/api/Logins/checklogin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      Username: username,
+      Password: password
+    })
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.text(); // Returns "Login Success"
     } else {
-      alert(xhr.responseText);
+      throw new Error('Login Failed');
+    }
+  });
+}
+
+
+function register() {
+  // create a new XHR object
+  var xhr = new XMLHttpRequest();
+
+  // specify the endpoint URL where you want to send the request
+  var url = "http://localhost/Catalog/api/Logins/CreateUser";
+  let username = document.querySelector("#sign-in-username").value;
+  let email = document.querySelector("#sign-in-email").value;
+  let password = document.querySelector("#sign-in-password").value;
+  let confirmPassword = document.querySelector("#sign-in-confirm-password").value;
+  // create a JSON object with the user information
+  var user = {
+    username: username,
+    email: email,
+    password: password,
+  };
+
+  // stringify the JSON object
+  var data = JSON.stringify(user);
+
+  // set the request headers
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+  xhr.setRequestHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  xhr.setRequestHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+
+  // handle the response from the server
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText);
+      if(password === confirmPassword) {
+        alert("You successfuly created account!");
+        toggle();
+      }else {
+        alert("Passwords must match!");
+      }
+      
+    } else {
+      console.log("nije uspeo unos podataka");
+      console.log(user);
     }
   };
-  xhr.send(loginData);
-};
+
+  // send the request to the server
+  xhr.send(data);
+}
+
+/* http://localhost/Catalog/api/Products/GetAllUsers */
+
+/* http://localhost/Catalog/api/Login/ValidateUser */
