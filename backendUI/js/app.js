@@ -65,21 +65,15 @@ function createItem(item) {
 
     createItem(newItem);
   });
-function deletItem() {
+function deleteItem() {
 
 }
-function getLogin(){
-    fetch("login.html").then(response => 
-        response.text()
-    ).then(data => {
-        document.querySelector('.meni').innerHTML = data;
-    })
-}
+
 function getSideNav() {
     fetch("sidenav.html").then(response => 
         response.text()
     ).then(data => {
-        document.querySelector('.side-nav').innerHTML = data;
+        document.querySelector('.side-nav-component').innerHTML = data;
+
     })
 }
-

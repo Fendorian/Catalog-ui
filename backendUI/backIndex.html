@@ -1,18 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <div class="login"></div>
+    <link rel="stylesheet" href="/backendUI/css/login.css" />
+    <link rel="stylesheet" href="/backendUI/css/sidenav.css" />
+    <link rel="stylesheet" href="/backendUI/css/maincontent.css" />
+  </head>
+  <body>
+    <!-- <div class="side-nav-component"></div>
+    <div class="main-content"></div> -->
+<div class="global-container">
     <div class="side-nav">
+      <div class="profile-picture">
+        <img src="/images/profile/userAvatar.jpeg" alt="" />
+      </div>
+      <div class="link-wrapper products-link">
+        <div class="side-nav-container">
+          <img src="/images/box-solid.svg" alt="" class="sidenav-svg" />
+          <a class="links" href="">Products</a>
+        </div>
+      </div>
+      <div class="link-wrapper categories-link">
+        <div class="side-nav-container"></div>
+        <img src="/images/category-icon.svg" alt="" class="sidenav-svg" />
+        <a class="links" href="">Categories</a>
+      </div>
+      <div class="link-wrapper subcategories-link">
+        <div class="side-nav-container">
+          <img src="/images/sub-category.svg" alt="" class="sidenav-svg" />
+          <a class="links" href="">Subcategories</a>
+        </div>
+      </div>
+      <div class="link-wrapper logout-link">
+        <div class="side-nav-container">
+          <img src="/images/logout.svg" alt="" class="sidenav-svg" />
+          <a class="links" href="">Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="search">
+            <img src="/images/magnifying-glass.svg" alt="">
+            <input class="search-input" placeholder="Search" type="text">
+        </div>
+        <div class="category-filter">
+            <h2 class="category-title">Categories</h2>
+            <div class="category-card-container">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <img src="/images/laptop.svg" alt="">
+                    </div>
+                    <div class="category-name">Laptopovi</div>
+                    <div class="category-amount">250</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <img src="/images/laptop.svg" alt="">
+                    </div>
+                    <div class="category-name">Laptopovi</div>
+                    <div class="category-amount">250</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <img src="/images/laptop.svg" alt="">
+                    </div>
+                    <div class="category-name">Laptopovi</div>
+                    <div class="category-amount">250</div>
+                </div>
+            </div>
+        </div>
+        <div class="products-filter">
+            <h2 class="products-title">Products</h2>
+            <div class="products-card-container">
+            <div class="products-card">
+                <div class="thumb-image">
+                    <img src="" alt="">
+                </div>
+                <div class="product-name">Dell</div>
+                <div class="product-category">Laptopovi</div>
+                <div class="three-dots-for-crud">
+                    <img src="/images/elipsis.svg" alt="">
+                </div>
+            </div>
+            <div class="products-card">
+                <div class="thumb-image">
+                    <img src="" alt="">
+                </div>
+                <div class="product-name">Dell</div>
+                <div class="product-category">Laptopovi</div>
+                <div class="three-dots-for-crud">
+                    <img src="/images/elipsis.svg" alt="">
+                </div>
+            </div>
+            <div class="products-card">
+                <div class="thumb-image">
+                    <img src="" alt="">
+                </div>
+                <div class="product-name">Dell</div>
+                <div class="product-category">Laptopovi</div>
+                <div class="three-dots-for-crud">
+                    <img src="/images/elipsis.svg" alt="">
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="single-container">
         
     </div>
-    <script src="/Catalog-ui/backendUI/js/app.js"></script>
-    <script src="/Catalog-ui/backendUI/js/login.js"></script>
-</body>
-
+</div>
+    <script src="/backendUI/js/sidenav.js"></script>
+    <script src="/backendUI/js/maincontent.js"></script>
+    <script src="/backendUI/js/app.js"></script>
+    
+  </body>
 </html>

@@ -1,22 +1,40 @@
-    <form onload="UbacitiMesnuZajednicu();" id="create-item-form" class="input-container" style="display: flex; flex-direction:column; width:50%; align-items:center;">
-        <label for="InsertID">ID</label>
-        <input id="InsertID" type="number" name="InsertID">
-        <label for="InsertIme">Име:</label>
-        <input id="InsertIme" type="text" name="InsertIme">
-        <label for="InsertPrezime">Презиме:</label>
-        <input id="InsertPrezime" type="text" name="InsertPrezime">
-        <label for="InsertStrucnaSprema">Стручна спрема:</label>    
-        <input id="InsertStrucnaSprema" type="text">
-        <label for="InsertPlata">Плата:</label>
-        <input id="InsertPlata" type="text" name="InsertPlata">
-        <label for="InsertStruka">Струка:</label>
-        <input id="InsertStruka" type="text" name="InsertStruka">
-        <label for="InsertSlika">Слика:</label>    
-        <input id="InsertSlika" type="text" name="InsertSlika">
-        <label for="InsertSlika">Месна заједница:</label>            
-        <select name="InsertMesnaZajednica" id="InsertMesnaZajednica">
-        </select>
-    
-        
-        <button onclick="UbacitiGradjana();">Убацити грађана</button>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="item-form">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+        </div>
+        <div>
+          <label for="abstract">Abstract:</label>
+          <input type="text" id="abstract" name="abstract">
+        </div>
+        <div>
+          <label for="desc">Description:</label>
+          <textarea id="desc" name="desc"></textarea>
+        </div>
+        <div>
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price">
+        </div>
+        <div>
+          <label for="category-id">Category ID:</label>
+          <input type="number" id="category-id" name="category-id">
+        </div>
+        <div>
+          <label for="image-url">Image URL:</label>
+          <input type="text" id="image-url" name="image-url">
+        </div>
+        <button type="submit">Create Item</button>
+      </form>
+      <script src="/backendUI/js/app.js"></script>
+</body>
+
+</html>
