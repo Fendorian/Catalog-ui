@@ -1,21 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="meni"></div>
-    <div class="pageImage"></div>
-    <div class="izmena"></div>
-    <div class="ubacaj"></div>
-    <div class="mainContent"></div>
-    <div class="footer"></div>
-    <script src="app.js" type = "text/javascript" ></script>
-    <script src="ubacaj.js"></script>
-    <script src="update.js"></script>
-</body>
+    <link rel="stylesheet" href="/frontendUI/css/style.css" />
+  </head>
+  <body>
+    <nav class="header">
+      <div class="logo">
+        <img class="logo-image" src="/images/logo.png" alt="" />
+      </div>
+      <div class="right-header">
+        <div class="search">
+          <img src="/images/magnifying-glass.svg" alt="" />
+          <input class="search-input" placeholder="Search" type="text" />
+        </div>
+        <div class="language">
+          <div class="dropdown">
+            <select name="" id="languageOptions">
+              <option value="eng">English</option>
+              <option value="">Serbia</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+    <div class="side-nav">
+      <h2>Category</h2>
+      <div class="category">
+        <div class="category-values">Laptop</div>
+        <div class="category-values">Monitori</div>
+        <div class="category-values">PC</div>
+      </div>
+      <h2>Filter by:</h2>
+      <div class="filter"></div>
+    </div>
+    <div class="main-content">
+        <div class="breadcrumb">
+            <div class="breadcrumb-text">Test breadcrumb</div>
+        </div>
+        <div class="main-content-header">
+            <h2>Laptop</h2>
+            <div class="dropdown-sort">
+                <select name="" id="languageOptions">
+                  <option value="defaultSort">Sort by: Most Popular</option>
+                  <option value="">Alphabet</option>
+                  <option value="">Price up</option>
+                  <option value="">Price down</option>
+                  
+                </select>
+              </div>
+        </div>
+    </div>
+</div>
+  </body>
 </html>

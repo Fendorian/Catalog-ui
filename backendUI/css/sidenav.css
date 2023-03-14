@@ -56,5 +56,18 @@
 .logout-link {
     margin-top: 570px;
 }
-
-
+#home {
+    display: block;
+}
+#product {
+    display: none;
+}
+#category {
+    display: none;
+}
+#sub-category {
+    display: none;
+}
+.selected {
+    background-color: #0D2B32;
+}
