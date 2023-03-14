@@ -1,11 +1,37 @@
 
+class Product {
+  constructor(imageUrl, name, category,abstract, price,desc) {
+    this.name = name;
+    this.category = category;
+    this.abstract = abstract;
+    this.desc = desc;
+    this.price = price;
+    this.imageUrl = imageUrl;
+  }
+}
+function createItem() {
+  const name = document.getElementById('CreateName').value;
+  const abstract = document.getElementById('CreateAbstract').value;
+  const desc = document.getElementById('CreateDescription').value;
+  const price = document.getElementById('CreatePrice').value;
+  const imageUrl = document.getElementById('CreateImageUrl').value;
+  const categoryID = document.getElementById('CreateCategoryID').value;
 
-function createItem(item) {
-    var xhr = new XMLHttpRequest();
-    var url = "http://localhost/Catalog/api/Products/CreateItem";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+  const product = new Product(imageUrl, name, categoryID,desc,abstract,price);
+
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText);
+      } else {
+        console.error(xhr.statusText);
+      }
+    }
+  };
+  xhr.open('POST', 'http://localhost/Catalog/api/Products/CreateItem', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.setRequestHeader(
       "Access-Control-Allow-Methods",
       "GET, POST, PUT, DELETE, OPTIONS"
@@ -14,15 +40,13 @@ function createItem(item) {
       "Access-Control-Allow-Headers",
       "Content-Type, Authorization"
     );
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log("Item created successfully");
-      }
-    };
+  xhr.send(JSON.stringify(product));
+}
 
-    var data = JSON.stringify(item);
-    xhr.send(data);
-  }
+document.getElementById('create-item-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  createItem();
+});
 
   function deleteItem(id) {
     var xhr = new XMLHttpRequest();
@@ -50,24 +74,22 @@ function createItem(item) {
   }
   
 
-  var form = document.getElementById("item-form");
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
+  // var form = document.getElementById("item-form");
+  // form.addEventListener("submit", function(event) {
+  //   event.preventDefault();
 
-    var newItem = {
-      Name: document.getElementById("name").value,
-      Abstract: document.getElementById("abstract").value,
-      Desc: document.getElementById("desc").value,
-      Price: parseInt(document.getElementById("price").value),
-      CategoryID: parseInt(document.getElementById("category-id").value),
-      ImageUrl: document.getElementById("image-url").value
-    };
+  //   var newItem = {
+  //     Name: document.getElementById("name").value,
+  //     Abstract: document.getElementById("abstract").value,
+  //     Desc: document.getElementById("desc").value,
+  //     Price: parseInt(document.getElementById("price").value),
+  //     CategoryID: parseInt(document.getElementById("category-id").value),
+  //     ImageUrl: document.getElementById("image-url").value
+  //   };
 
-    createItem(newItem);
-  });
-function deleteItem() {
+  //   createItem(newItem);
+  // });
 
-}
 
 function getSideNav() {
     fetch("sidenav.html").then(response => 

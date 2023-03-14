@@ -1,9 +1,12 @@
-export default class Product {
-    constructor(image, name, category, deleteText) {
-      this.image = image;
-      this.name = name;
-      this.category = category;
-      this.deleteText = deleteText;
-    }
+class Product {
+  constructor(image, name, category,abstract, price,categoryID) {
+    this.name = name;
+    this.category = category;
+    this.abstract = abstract;
+    this.image = image;
+    this.categoryID = categoryID;
+    this.price = price;
   }
-  
+}
+
+export { Product };

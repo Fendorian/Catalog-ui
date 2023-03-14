@@ -1,3 +1,6 @@
+h2 {
+    color: white;
+}
 .global-container {
     display: flex;
     flex-direction: row;
@@ -28,9 +31,6 @@ input[type='text'] {
 input[type='text']  ::placeholder {
     font-size: 16px;
     padding-left: 10px;
-}
-.category-title, .products-title {
-    color: white;
 }
 .category-card {
     background-color: #FFBA33;
@@ -100,4 +100,29 @@ input[type='text']  ::placeholder {
     background-color: white; /* 50% opacity */
     z-index: 999999;
     border-radius: 5%;
+  }
+
+
+  .product-component {
+    display: none;
+  }
+
+  .product-header-component {
+    display: flex;
+    align-items: center;
+  }
+  .add-product {
+    background-color: green;
+    border-radius: 20%;
+    padding: 5px;
+    border: 1px solid black;
+    margin-left: 20px;
+  }
+  .product-component-form {
+    display: flex;
+    flex-direction: column;
+  }
+  .submit-adding-product {
+    background-color: green;
+    display: block;
   }

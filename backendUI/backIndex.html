@@ -5,116 +5,155 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/backendUI/css/login.css" />
-    <link rel="stylesheet" href="/backendUI/css/sidenav.css" />
-    <link rel="stylesheet" href="/backendUI/css/maincontent.css" />
+    <link rel="stylesheet" href="/Catalog-ui/backendUI/css/login.css" />
+    <link rel="stylesheet" href="/Catalog-ui/backendUI/CSS/sidenav.css" />
+    <link rel="stylesheet" href="/Catalog-ui/backendUI/css/maincontent.css" />
   </head>
   <body>
     <!-- <div class="side-nav-component"></div>
     <div class="main-content"></div> -->
-<div class="global-container">
-    <div class="side-nav">
-      <div class="profile-picture">
-        <img src="/images/profile/userAvatar.jpeg" alt="" />
-      </div>
-      <div class="link-wrapper products-link">
-        <div class="side-nav-container">
-          <img src="/images/box-solid.svg" alt="" class="sidenav-svg" />
-          <a class="links" href="">Products</a>
+
+    <div class="global-container">
+      <div class="side-nav">
+        <div class="profile-picture">
+          <img src="/Catalog-ui/images/profile/userAvatar.jpeg" alt="" />
+        </div>
+        <div class="link-wrapper products-link" onclick="productsComponent();">
+          <div class="side-nav-container">
+            <img
+              src="/Catalog-ui/images/box-solid.svg"
+              alt=""
+              class="sidenav-svg"
+            />
+            <a class="links">Products</a>
+          </div>
+        </div>
+        <div
+          class="link-wrapper categories-link"
+          onclick="categoryComponent();"
+        >
+          <div class="side-nav-container"></div>
+          <img
+            src="/Catalog-ui/images/category-icon.svg"
+            alt=""
+            class="sidenav-svg"
+          />
+          <a class="links">Categories</a>
+        </div>
+        <div
+          class="link-wrapper subcategories-link"
+          onclick="subCategoryComponent();"
+        >
+          <div class="side-nav-container">
+            <img
+              src="/Catalog-ui/images/sub-category.svg"
+              alt=""
+              class="sidenav-svg"
+            />
+            <a class="links">Subcategories</a>
+          </div>
+        </div>
+        <div class="link-wrapper logout-link" onclick="logout();">
+          <div class="side-nav-container">
+            <img
+              src="/Catalog-ui/images/logout.svg"
+              alt=""
+              class="sidenav-svg"
+            />
+            <a class="links">Logout</a>
+          </div>
         </div>
       </div>
-      <div class="link-wrapper categories-link">
-        <div class="side-nav-container"></div>
-        <img src="/images/category-icon.svg" alt="" class="sidenav-svg" />
-        <a class="links" href="">Categories</a>
-      </div>
-      <div class="link-wrapper subcategories-link">
-        <div class="side-nav-container">
-          <img src="/images/sub-category.svg" alt="" class="sidenav-svg" />
-          <a class="links" href="">Subcategories</a>
-        </div>
-      </div>
-      <div class="link-wrapper logout-link">
-        <div class="side-nav-container">
-          <img src="/images/logout.svg" alt="" class="sidenav-svg" />
-          <a class="links" href="">Logout</a>
-        </div>
-      </div>
-    </div>
-    <div class="container">
+      <div class="container">
+        <h2>Search</h2>
         <div class="search">
-            <img src="/images/magnifying-glass.svg" alt="">
-            <input class="search-input" placeholder="Search" type="text">
+          <img src="/images/magnifying-glass.svg" alt="" />
+          <input class="search-input" placeholder="Search" type="text" />
         </div>
-        <div class="category-filter">
+        <div class="content-wrapper">
+          <div class="category-filter">
             <h2 class="category-title">Categories</h2>
             <div class="category-card-container">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <img src="/images/laptop.svg" alt="">
-                    </div>
-                    <div class="category-name">Laptopovi</div>
-                    <div class="category-amount">250</div>
+              <div class="category-card">
+                <div class="category-icon">
+                  <img src="/Catalog-ui/images/laptop.svg" alt="" />
                 </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <img src="/images/laptop.svg" alt="">
-                    </div>
-                    <div class="category-name">Laptopovi</div>
-                    <div class="category-amount">250</div>
+                <div class="category-name">Laptopovi</div>
+                <div class="category-amount">250</div>
+              </div>
+              <div class="category-card">
+                <div class="category-icon">
+                  <img src="/Catalog-ui/images/laptop.svg" alt="" />
                 </div>
-                <div class="category-card">
-                    <div class="category-icon">
-                        <img src="/images/laptop.svg" alt="">
-                    </div>
-                    <div class="category-name">Laptopovi</div>
-                    <div class="category-amount">250</div>
+                <div class="category-name">Laptopovi</div>
+                <div class="category-amount">250</div>
+              </div>
+              <div class="category-card">
+                <div class="category-icon">
+                  <img src="/Catalog-ui/images/laptop.svg" alt="" />
                 </div>
+                <div class="category-name">Laptopovi</div>
+                <div class="category-amount">250</div>
+              </div>
             </div>
-        </div>
-        <div class="products-filter">
+          </div>
+          <div class="products-filter">
             <h2 class="products-title">Products</h2>
             <div class="products-card-container">
-            <div class="products-card">
+              <div class="products-card">
                 <div class="thumb-image">
-                    <img src="" alt="">
+                  <img src="" alt="" />
                 </div>
                 <div class="product-name">Dell</div>
                 <div class="product-category">Laptopovi</div>
                 <div class="three-dots-for-crud">
-                    <img src="/images/elipsis.svg" alt="">
+                  <img src="/Catalog-ui/images/elipsis.svg" alt="" />
                 </div>
+              </div>
             </div>
-            <div class="products-card">
-                <div class="thumb-image">
-                    <img src="" alt="">
-                </div>
-                <div class="product-name">Dell</div>
-                <div class="product-category">Laptopovi</div>
-                <div class="three-dots-for-crud">
-                    <img src="/images/elipsis.svg" alt="">
-                </div>
-            </div>
-            <div class="products-card">
-                <div class="thumb-image">
-                    <img src="" alt="">
-                </div>
-                <div class="product-name">Dell</div>
-                <div class="product-category">Laptopovi</div>
-                <div class="three-dots-for-crud">
-                    <img src="/images/elipsis.svg" alt="">
-                </div>
-            </div>
+          </div>
         </div>
+        <!-- Products component -->
+        <div class="product-component">
+          <div class="product-header-component">
+            <h2>Products</h2>
+            <div class="add-product" onclick="showCreateForm();">
+              <img src="/Catalog-ui/images/plus.svg" alt="" />
+            </div>
+          </div>
+          <div id="create-item-form" class="product-component-form">
+            <label for="CreateName">Name</label>
+            <input value="testName" placeholder="Enter name here..." id="CreateName" type="text">
+            <label for="CreateAbstract">Abstract</label>
+            <input value="testAbstract" placeholder="Enter abstract here..." type="text" id="CreateAbstract">
+            <label for="CreateDescription">Enter description here</label>
+            <input value="testDescription" type="text" id="CreateDescription">
+            <label for="CreatePrice">Enter price here</label>
+            <input value="123" placeholder="Enter price here..." type="number" id="CreatePrice">
+            <label value="testUrl.png" for="CreateImageUrl">Enter Image Url here</label>
+            <input placeholder="Enter url here..." type="text" id="CreateImageUrl">
+            <select id="CreateCategoryID" name="CreateCategoryID">
+              <option value="1">Laptopovi</option>
+              <option value="2">Monitori</option>
+              <option value="3">PC</option>
+            </select>
+            <div class="submit-adding-product" onclick="createItem();">Add Product</div>
+          </div>
         </div>
+      </div>
+      <!-- <div class="single-container"></div> -->
     </div>
-    <div class="single-container">
-        
-    </div>
-</div>
-    <script src="/backendUI/js/sidenav.js"></script>
-    <script src="/backendUI/js/maincontent.js"></script>
-    <script src="/backendUI/js/app.js"></script>
-    
+    <script src="/Catalog-ui/backendUI/js/sidenav.js"></script>
+    <script
+      type="module"
+      src="/Catalog-ui/backendUI/js/maincontent.js"
+    ></script>
+    <script
+    src="/Catalog-ui/backendUI/js/app.js">
+  </script>
+    <script
+      type="module"
+      src="/Catalog-ui/backendUI/js/models/product.js"
+    ></script>
   </body>
 </html>
