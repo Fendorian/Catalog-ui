@@ -1,22 +1,23 @@
-import { Product } from './models/product.js';
+const items = document.querySelectorAll(".products-card");
+let overlay = null;
 
-
-
- const items = document.querySelectorAll('.products-card');
- let overlay = null;
-  
-  items.forEach(item => {
-    item.addEventListener('click', function() {
-      // Remove selected class from all items
-      items.forEach(item => {
-        item.classList.remove('selected');
-      });
-      // Add selected class to clicked item
-      this.classList.add('selected');
-      // Create a new overlay or show the existing one
-      if (!overlay) {
-        const product = new Product("path/to/image.jpg", "Dell", "Laptopovi", "Delete");
-        const html = `
+items.forEach((item) => {
+  item.addEventListener("click", function () {
+    // Remove selected class from all items
+    items.forEach((item) => {
+      item.classList.remove("selected");
+    });
+    // Add selected class to clicked item
+    this.classList.add("selected");
+    // Create a new overlay or show the existing one
+    if (!overlay) {
+      const product = new Product(
+        "path/to/image.jpg",
+        "Dell",
+        "Laptopovi",
+        "Delete"
+      );
+      const html = `
           <div class="overlay">
             <div class="single-component">
               <div class="picture-container">
@@ -28,27 +29,24 @@ import { Product } from './models/product.js';
             </div>
           </div>
         `;
-        overlay = document.createElement('div');
-        overlay.innerHTML = html;
-        document.body.appendChild(overlay);
-      } else {
-        overlay.style.display = 'block';
-      }
-    });
-  });
-  
-
-  document.addEventListener('click', event => {
-    if (event.target.matches('.overlay')) {
-      event.target.style.display = 'none';
-      event.target.querySelector('div').style.display = 'none';
-      overlay = null;
+      overlay = document.createElement("div");
+      overlay.innerHTML = html;
+      document.body.appendChild(overlay);
+    } else {
+      overlay.style.display = "block";
     }
   });
+});
 
-
-
-  // Creating new item
+// Kreira overlay za single prikaz
+document.addEventListener("click", (event) => {
+  if (event.target.matches(".overlay")) {
+    event.target.style.display = "none";
+    event.target.querySelector("div").style.display = "none";
+    overlay = null;
+  }
+});
+// Creating new item
 function generateProductCard(product) {
   return `
     <div class="products-card">

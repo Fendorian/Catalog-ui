@@ -1,6 +1,5 @@
-
 class Product {
-  constructor(imageUrl, name, category,abstract, price,desc) {
+  constructor(imageUrl, name, category, abstract, price, desc) {
     this.name = name;
     this.category = category;
     this.abstract = abstract;
@@ -10,17 +9,24 @@ class Product {
   }
 }
 function createItem() {
-  const name = document.getElementById('CreateName').value;
-  const abstract = document.getElementById('CreateAbstract').value;
-  const desc = document.getElementById('CreateDescription').value;
-  const price = document.getElementById('CreatePrice').value;
-  const imageUrl = document.getElementById('CreateImageUrl').value;
-  const categoryID = document.getElementById('CreateCategoryID').value;
+  const name = document.getElementById("CreateName").value;
+  const abstract = document.getElementById("CreateAbstract").value;
+  const desc = document.getElementById("CreateDescription").value;
+  const price = document.getElementById("CreatePrice").value;
+  const imageUrl = document.getElementById("CreateImageUrl").value;
+  const categoryID = document.getElementById("CreateCategoryID").value;
 
-  const product = new Product(imageUrl, name, categoryID,desc,abstract,price);
+  const product = new Product(
+    imageUrl,
+    name,
+    categoryID,
+    desc,
+    abstract,
+    price
+  );
 
   const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
@@ -29,73 +35,58 @@ function createItem() {
       }
     }
   };
-  xhr.open('POST', 'http://localhost/Catalog/api/Products/CreateItem', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.open("POST", "http://localhost/Catalog/api/Products/CreateItem", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-    xhr.setRequestHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS"
-    );
-    xhr.setRequestHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization"
-    );
+  xhr.setRequestHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  xhr.setRequestHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
   xhr.send(JSON.stringify(product));
 }
 
-document.getElementById('create-item-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-  createItem();
-});
+document
+  .getElementById("create-item-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    createItem();
+  });
 
-  function deleteItem(id) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("DELETE", "http://localhost/Catalog/api/Products/DeleteItem/" + id);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-    xhr.setRequestHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS"
-    );
-    xhr.setRequestHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization"
-    );
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-        console.log("Item deleted successfully.");
-      } else if (xhr.status === 404) {
-        console.log("Item not found.");
-      } else {
-        console.log("Error deleting item.");
-      }
-    };
-    xhr.send();
-  }
-  
-
-  // var form = document.getElementById("item-form");
-  // form.addEventListener("submit", function(event) {
-  //   event.preventDefault();
-
-  //   var newItem = {
-  //     Name: document.getElementById("name").value,
-  //     Abstract: document.getElementById("abstract").value,
-  //     Desc: document.getElementById("desc").value,
-  //     Price: parseInt(document.getElementById("price").value),
-  //     CategoryID: parseInt(document.getElementById("category-id").value),
-  //     ImageUrl: document.getElementById("image-url").value
-  //   };
-
-  //   createItem(newItem);
-  // });
-
-
-function getSideNav() {
-    fetch("sidenav.html").then(response => 
-        response.text()
-    ).then(data => {
-        document.querySelector('.side-nav-component').innerHTML = data;
-
-    })
+function deleteItem(id) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("DELETE", "http://localhost/Catalog/api/Products/DeleteItem/" + id);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+  xhr.setRequestHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  xhr.setRequestHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Item deleted successfully.");
+    } else if (xhr.status === 404) {
+      console.log("Item not found.");
+    } else {
+      console.log("Error deleting item.");
+    }
+  };
+  xhr.send();
 }
+
+/* ovo je za posle */
+// function getSideNav() {
+//     fetch("sidenav.html").then(response =>
+//         response.text()
+//     ).then(data => {
+//         document.querySelector('.side-nav-component').innerHTML = data;
+
+//     })
+// }
