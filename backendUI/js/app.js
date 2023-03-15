@@ -1,7 +1,8 @@
 class Product {
-  constructor(imageUrl, name, category, abstract, price, desc) {
+  constructor(itemId, imageUrl, name, categoryID, abstract, price, desc) {
+    this.itemId = itemId;
     this.name = name;
-    this.category = category;
+    this.categoryID = categoryID;
     this.abstract = abstract;
     this.desc = desc;
     this.price = price;
@@ -9,6 +10,7 @@ class Product {
   }
 }
 function createItem() {
+  const itemID = document.getElementById("CreateID").value;
   const name = document.getElementById("CreateName").value;
   const abstract = document.getElementById("CreateAbstract").value;
   const desc = document.getElementById("CreateDescription").value;
@@ -17,6 +19,7 @@ function createItem() {
   const categoryID = document.getElementById("CreateCategoryID").value;
 
   const product = new Product(
+    itemID,
     imageUrl,
     name,
     categoryID,

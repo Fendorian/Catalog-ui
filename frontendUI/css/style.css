@@ -17,7 +17,7 @@ body {
 }
 .main-content-body {
     display: flex;
-    gap: 1%;
+    gap: 2%;
 }
 .logo {
     border-right: 1px solid gray;
@@ -79,7 +79,7 @@ select {
 .product-card {
     border: 1px solid gray;
     border-radius: 10px;
-    width: 32%;
+    width: 31%;
     padding-bottom: 20px;
 }
 .product-title {
@@ -94,6 +94,7 @@ select {
     align-items: center;
 }
 .product-image img {
+    width: 100%;
     border-radius: 5px 5px 0 0;
 }
 .product-button {
