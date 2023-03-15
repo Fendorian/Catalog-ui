@@ -1,13 +1,3 @@
-// class Product {
-//   constructor(imageUrl, name, category, abstract, price, desc) {
-//     this.name = name;
-//     this.category = category;
-//     this.abstract = abstract;
-//     this.desc = desc;
-//     this.price = price;
-//     this.imageUrl = imageUrl;
-//   }
-// }
 const items = document.querySelectorAll(".products-card");
 let overlay = null;
 let newDiv = null;
@@ -22,9 +12,10 @@ items.forEach((item) => {
     this.classList.add("selected");
     // Create a new overlay or show the existing one
     if (!overlay) {
-      const product = new Product(1,'/image/heart.svg','testName',1,'testAbstract',123,'testdesc');
+      const product = new Product(1,'/image/heart.svg','testName',1,'testAbstract',123,);
       const html = `
           <div class="overlay">
+          
             <div class="single-component">
               <div class="picture-container">
                 <img src="${product.imageUrl}" alt="">
@@ -35,7 +26,7 @@ items.forEach((item) => {
             </div>
           </div>
         `;
-      overlay = document.createElement("div");f
+      overlay = document.createElement("div");
       overlay.classList.add("overlay-wrapper");
       overlay.innerHTML = html;
       newDiv = overlay.querySelector(".single-component");
@@ -48,21 +39,11 @@ items.forEach((item) => {
 
 // Event listener to close the overlay when clicking outside of it or pressing ESC key
 document.addEventListener("click", (event) => {
-  if (overlay && event.target.closest(".overlay-wrapper")) {
+  //  if (overlay && event.target.closest(".overlay-wrapper")) {
+    if(event.target.classList.contains("overlay")){
+    console.log(event.target);
     overlay.remove();
     overlay = null;
     newDiv = null;
   }
 });
-// // Creating new item
-// function generateProductCard(product) {
-//   return `
-//     <div class="products-card">
-//       <div class="picture-container">
-//         <img src="${product.image}" alt="">
-//       </div>
-//       <div class="product-title">${product.name}</div>
-//       <div class="product-category">${product.category}</div>
-//     </div>
-//   `;
-// }
