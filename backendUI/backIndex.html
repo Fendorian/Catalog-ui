@@ -18,13 +18,21 @@
         <div class="profile-picture">
           <img src="/images/profile/userAvatar.jpeg" alt="" />
         </div>
-        <div class="link-wrapper products-link menu-item" data-target="home" onclick="toggleDisplay('home')">
+        <div
+          class="link-wrapper products-link menu-item"
+          data-target="home"
+          onclick="toggleDisplay('home')"
+        >
           <div class="side-nav-container">
             <img src="/images/house.svg" alt="" class="sidenav-svg" />
             <a class="links">Home</a>
           </div>
         </div>
-        <div class="link-wrapper products-link menu-item" data-target="product" onclick="toggleDisplay('product')">
+        <div
+          class="link-wrapper products-link menu-item"
+          data-target="product"
+          onclick="toggleDisplay('product')"
+        >
           <div class="side-nav-container">
             <img src="/images/box-solid.svg" alt="" class="sidenav-svg" />
             <a class="links">Products</a>
@@ -45,7 +53,12 @@
           data-target="sub-category"
         >
           <div class="side-nav-container">
-            <img src="/images/sub-category.svg" data-target="sub-category" alt="" class="sidenav-svg" />
+            <img
+              src="/images/sub-category.svg"
+              data-target="sub-category"
+              alt=""
+              class="sidenav-svg"
+            />
             <a class="links">Subcategories</a>
           </div>
         </div>
@@ -99,7 +112,11 @@
                 <div class="product-name">Dell</div>
                 <div class="product-category">Laptopovi</div>
                 <div class="three-dots-for-crud" id="three-dots-for-crud">
-                  <img class="three-dots-svg" src="/images/elipsis.svg" alt="" />
+                  <img
+                    class="three-dots-svg"
+                    src="/images/elipsis.svg"
+                    alt=""
+                  />
                   <div class="dropdown">
                     <a href="#">View</a>
                     <a href="#">Edit</a>
@@ -114,12 +131,13 @@
         <div id="product" class="product-component content">
           <div class="product-header-component">
             <h2>Products</h2>
+            <!-- Add Product -->
             <div class="add-product">
               <img src="/images/plus.svg" alt="" />
             </div>
           </div>
-          <div id="create-item-form" class="product-component-form">
-            <input type="text" name="" id="CreateID" style="display:none;">
+          <div id="create-item-form" class="product-component-form hidden">
+            <input type="text" name="" id="CreateID" style="display: none" />
             <label for="CreateName">Name</label>
             <input
               value="testName"
@@ -159,6 +177,29 @@
             <div class="submit-adding-product" onclick="createItem();">
               Add Product
             </div>
+            
+          </div>
+          <!-- Product list -->
+          <div class="products-card-container">
+            <div class="products-card">
+              <div class="thumb-image">
+                <img src="" alt="" />
+              </div>
+              <div class="product-name">Dell</div>
+              <div class="product-category">Laptopovi</div>
+              <div class="three-dots-for-crud" id="three-dots-for-crud">
+                <img
+                  class="three-dots-svg"
+                  src="/images/elipsis.svg"
+                  alt=""
+                />
+                <div class="dropdown">
+                  <a href="#">View</a>
+                  <a href="#">Edit</a>
+                  <a href="#">Delete</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Category component -->
@@ -170,8 +211,33 @@
             </div>
           </div>
           <div class="category-card-container">
+            <div class="slider">
+              <div class="slides">
+                <div class="category-card">
+                  <div class="category-icon">
+                    <img src="/images/laptop.svg" alt="" />
+                  </div>
+                  <div class="category-name">Laptopovi</div>
+                  <div class="category-amount">250</div>
+                </div>
+                <div class="category-card">
+                  <div class="category-icon">
+                    <img src="/images/laptop.svg" alt="" />
+                  </div>
+                  <div class="category-name">Laptopovi</div>
+                  <div class="category-amount">250</div>
+                </div>
+                <div class="category-card">
+                  <div class="category-icon">
+                    <img src="/images/laptop.svg" alt="" />
+                  </div>
+                  <div class="category-name">Laptopovi</div>
+                  <div class="category-amount">250</div>
+                </div>
+              </div>
+            </div>
+            </div>
           </div>
-        </div>
         <!-- Sub category component -->
         <div id="sub-category" class="sub-category-component content">
           <div class="sub-category-component-header">
@@ -180,8 +246,7 @@
               <img src="/images/plus.svg" alt="" />
             </div>
           </div>
-          <div class="category-card-container">
-          </div>
+          <div class="category-card-container"></div>
         </div>
       </div>
       <!-- <div class="single-container"></div> -->

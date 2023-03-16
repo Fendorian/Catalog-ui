@@ -143,7 +143,9 @@
   
   input[type="text"]::placeholder,
   input[type="password"]::placeholder,
-  input[type="email"]::placeholder {
+  input[type="email"]::placeholder,
+  input[type="number"]::placeholder 
+  {
     padding-left: 15px;
   }
   /* Shrinking css */
