@@ -11,7 +11,7 @@ body {
     border-bottom: 1px solid grey;
 }
 .container {
-    max-width: 1440px;
+    /* max-width: 1440px; */
     margin: auto;
     display: flex;
 }
@@ -21,7 +21,7 @@ body {
 }
 .logo {
     border-right: 1px solid gray;
-    width: 379px;
+    width: 30%;
     display: flex;
     justify-content: center;
 }
@@ -55,12 +55,12 @@ select {
     flex-direction: column;
     border-right: 1px solid gray;
     height: 100vh;
-    width: 298px;
+    width: 30%;
     overflow: auto;
 }
 .right-header {
     display: flex;
-    width: 100%;
+    width: 70%;
     justify-content: space-between;
     padding: 0 1.5%;
 }
@@ -73,8 +73,8 @@ select {
     justify-content: space-between;
 }
 .main-content {
-    width: 80%;
-    padding: 0 2%;
+    width: 70%;
+    padding: 0 1.5%;
 }
 .product-card {
     border: 1px solid gray;
