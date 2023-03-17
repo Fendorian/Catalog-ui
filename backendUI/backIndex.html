@@ -132,7 +132,7 @@
           <div class="product-header-component">
             <h2>Products</h2>
             <!-- Add Product -->
-            <div class="add-product">
+            <div class="add-product add-button">
               <img src="/images/plus.svg" alt="" />
             </div>
           </div>
@@ -169,15 +169,64 @@
               type="text"
               id="CreateImageUrl"
             />
+            <label for="CreateCategoryID">Pick category:</label>
             <select id="CreateCategoryID" name="CreateCategoryID">
               <option value="1">Laptopovi</option>
               <option value="2">Monitori</option>
               <option value="3">PC</option>
             </select>
-            <div class="submit-adding-product" onclick="createItem();">
-              Add Product
+            <div class="button-wrapper">
+              <div class="submit-adding-product" onclick="createItem();">
+                Add Product
+              </div>
+              <div class="cancel-button">Cancel</div>
             </div>
-            
+          </div>
+          <div id="edit-item-form" class="product-component-form hidden">
+            <input type="text" name="" id="EditID" style="display: none" />
+            <label for="EditName">Name</label>
+            <input
+              value="testName"
+              placeholder="Enter name here..."
+              id="EditName"
+              type="text"
+            />
+            <label for="EditAbstract">Abstract</label>
+            <input
+              value="testAbstract"
+              placeholder="Enter abstract here..."
+              type="text"
+              id="EditAbstract"
+            />
+            <label for="EditDescription">Enter description here</label>
+            <input value="testDescription" type="text" id="EditDescription" />
+            <label for="EditPrice">Enter price here</label>
+            <input
+              value="123"
+              placeholder="Enter price here..."
+              type="number"
+              id="EditPrice"
+            />
+            <label value="testUrl.png" for="EditImageUrl"
+              >Enter Image Url here</label
+            >
+            <input
+              placeholder="Enter url here..."
+              type="text"
+              id="EditImageUrl"
+            />
+            <label for="EditCategoryID">Pick category:</label>
+            <select id="EditCategoryID" name="EditCategoryID">
+              <option value="1">Laptopovi</option>
+              <option value="2">Monitori</option>
+              <option value="3">PC</option>
+            </select>
+            <div class="button-wrapper">
+              <div class="submit-adding-product" onclick="editItem();">
+                Add Product
+              </div>
+              <div class="cancel-button">Cancel</div>
+            </div>
           </div>
           <!-- Product list -->
           <div class="products-card-container">
@@ -188,11 +237,7 @@
               <div class="product-name">Dell</div>
               <div class="product-category">Laptopovi</div>
               <div class="three-dots-for-crud" id="three-dots-for-crud">
-                <img
-                  class="three-dots-svg"
-                  src="/images/elipsis.svg"
-                  alt=""
-                />
+                <img class="three-dots-svg" src="/images/elipsis.svg" alt="" />
                 <div class="dropdown">
                   <a href="#">View</a>
                   <a href="#">Edit</a>
@@ -206,7 +251,7 @@
         <div id="category" class="category-component content">
           <div class="category-component-header">
             <h2>Categories</h2>
-            <div class="add-category">
+            <div class="add-category add-button">
               <img src="/images/plus.svg" alt="" />
             </div>
           </div>
@@ -236,13 +281,13 @@
                 </div>
               </div>
             </div>
-            </div>
           </div>
+        </div>
         <!-- Sub category component -->
         <div id="sub-category" class="sub-category-component content">
           <div class="sub-category-component-header">
             <h2>SubCategories</h2>
-            <div class="add-sub-category">
+            <div class="add-sub-category add-button">
               <img src="/images/plus.svg" alt="" />
             </div>
           </div>

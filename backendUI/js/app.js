@@ -1,14 +1,4 @@
-class Product {
-  constructor(itemId, imageUrl, name, categoryID, abstract, price, desc) {
-    this.itemId = itemId;
-    this.name = name;
-    this.categoryID = categoryID;
-    this.abstract = abstract;
-    this.desc = desc;
-    this.price = price;
-    this.imageUrl = imageUrl;
-  }
-}
+// Initiating class product
 function createItem() {
   const itemID = document.getElementById("CreateID").value;
   const name = document.getElementById("CreateName").value;
@@ -58,6 +48,7 @@ document
     event.preventDefault();
     createItem();
   });
+// Ovde edit
 
 function deleteItem(id) {
   var xhr = new XMLHttpRequest();

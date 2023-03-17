@@ -76,7 +76,12 @@ items.forEach((item, index) => {
     // Check if the clicked element is the .three-dots-svg element
     if (event.target.classList.contains("three-dots-svg")) {
       // Execute a different function for the .three-dots-svg element
-      console.log("Clicked on the three dots");
+      let moreDetails = document.querySelector('.dropdown');
+      if (moreDetails.style.display === "flex") {
+        moreDetails.style.display = "none";
+      } else {
+        moreDetails.style.display = "flex";
+      }
       return;
     }
 
@@ -141,7 +146,7 @@ document.addEventListener("click", (event) => {
 
 let productComponentForm = document.querySelector(".product-component-form");
 let addProductButton = document.querySelector(".add-product");
-
+let cancelButton = document.querySelector(".cancel-button");
 // Hide the product-component-form on page load
 productComponentForm.style.overflow = "hidden";
 productComponentForm.style.height = "0";
@@ -158,3 +163,32 @@ addProductButton.addEventListener("click", () => {
     }, 500);
   }
 });
+cancelButton.addEventListener("click", () => {
+  if (productComponentForm.classList.contains("hidden")) {
+    productComponentForm.classList.remove("hidden");
+    productComponentForm.style.transition = "height 0.5s ease-in-out";
+    productComponentForm.style.height = "100%";
+  } else {
+    productComponentForm.style.height = "0";
+    setTimeout(() => {
+      productComponentForm.classList.add("hidden");
+    }, 500);
+  }
+});
+function partCategories() {
+  let categoryCards = document.querySelectorAll(".category-card");
+  // add click event listener to each category card element
+  categoryCards.forEach(card => {
+    card.addEventListener("click", () => {
+      // remove the 'selected' class from any previously selected card
+      const previouslySelected = document.querySelector(".category-card.selected");
+      if (previouslySelected) {
+        previouslySelected.classList.remove("selected");
+      }
+
+      // add the 'selected' class to the clicked card
+      card.classList.add("selected");
+    });
+  });
+}
+partCategories();
