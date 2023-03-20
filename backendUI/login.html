@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="right-side-login">
-        <form class="form-container">
+        <div class="form-container">
           <div class="inner-form inner-form-login">
             <div class="inner-form-top">
               <a class="inner-form-top-already" href="#">ALREADY MEMEBER</a>
@@ -37,7 +37,7 @@
                 class="inner-form-bot-input"
                 type="password"
               />
-              <button class="inner-form-bot-button" onclick="successSignIn();">LOGIN</button>
+              <div class="inner-form-bot-button" onclick="successLogin();">LOGIN</div>
             </div>
           </div>
           <div class="inner-form inner-form-registration hidden">
@@ -66,7 +66,7 @@
                 class="inner-form-bot-input"
                 type="password"
               />
-              <button class="inner-form-bot-button" onclick="successSignIn();">SIGN IN</button>
+              <div class="inner-form-bot-bottom" onclick="register();">SIGN IN</div>
             </div>
           </div>
           <div class="outer-form-login">
@@ -82,7 +82,7 @@
             <a class="outer-form-missing" href="#" onclick="toggle();">Switch to login</a>
           </div>
 
-        </form>
+        </div>
       </div>
     </div>
     <script src="/backendUI/js/app.js"></script>

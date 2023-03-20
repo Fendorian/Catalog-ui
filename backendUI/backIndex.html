@@ -76,30 +76,9 @@
           <input class="search-input" placeholder="Search" type="text" />
         </div>
         <div id="home" class="content-wrapper">
-          <div class="category-filter">
+          <div class="category-card-container">
             <h2 class="category-title">Categories</h2>
             <div class="category-card-container">
-              <div class="category-card">
-                <div class="category-icon">
-                  <img src="/images/laptop.svg" alt="" />
-                </div>
-                <div class="category-name">Laptopovi</div>
-                <div class="category-amount">250</div>
-              </div>
-              <div class="category-card">
-                <div class="category-icon">
-                  <img src="/images/laptop.svg" alt="" />
-                </div>
-                <div class="category-name">Laptopovi</div>
-                <div class="category-amount">250</div>
-              </div>
-              <div class="category-card">
-                <div class="category-icon">
-                  <img src="/images/laptop.svg" alt="" />
-                </div>
-                <div class="category-name">Laptopovi</div>
-                <div class="category-amount">250</div>
-              </div>
             </div>
           </div>
           <div class="products-filter">
@@ -137,10 +116,6 @@
                 <a href="#" class="page-number">5</a>
               </div>
               <a href="#" class="pagination-arrow arrow-right"><i class="fa fa-angle-right"></i></a>
-              <div class="page-size">
-                <span>Page Size:</span>
-                <input type="number" min="1" value="6" />
-              </div>
             </div>
           </div>
         </div>
@@ -246,22 +221,9 @@
             </div>
           </div>
           <!-- Product list -->
-          <div class="products-card-container">
-            <div class="products-card">
-              <div class="thumb-image">
-                <img src="" alt="" />
-              </div>
-              <div class="product-name">Dell</div>
-              <div class="product-category">Laptopovi</div>
-              <div class="three-dots-for-crud" id="three-dots-for-crud">
-                <img class="three-dots-svg" src="/images/elipsis.svg" alt="" />
-                <div class="dropdown">
-                  <a href="#">View</a>
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
-                </div>
-              </div>
-            </div>
+          <div class="products-filter">
+          <div class="products-card-filter">
+          </div>
           </div>
         </div>
         <!-- Category component -->
@@ -272,32 +234,52 @@
               <img src="/images/plus.svg" alt="" />
             </div>
           </div>
-          <div class="category-card-container">
-            <div class="slider">
-              <div class="slides">
-                <div class="category-card">
-                  <div class="category-icon">
-                    <img src="/images/laptop.svg" alt="" />
-                  </div>
-                  <div class="category-name">Laptopovi</div>
-                  <div class="category-amount">250</div>
-                </div>
-                <div class="category-card">
-                  <div class="category-icon">
-                    <img src="/images/laptop.svg" alt="" />
-                  </div>
-                  <div class="category-name">Laptopovi</div>
-                  <div class="category-amount">250</div>
-                </div>
-                <div class="category-card">
-                  <div class="category-icon">
-                    <img src="/images/laptop.svg" alt="" />
-                  </div>
-                  <div class="category-name">Laptopovi</div>
-                  <div class="category-amount">250</div>
-                </div>
+          <div id="add-category-form" class="category-component-form">
+            <input type="text" name="" id="EditID" style="display: none" />
+            <label for="EditName">Name</label>
+            <input
+              value="testName"
+              placeholder="Enter category name here..."
+              id="EditName"
+              type="text"
+            />
+            <label value="testUrl.png" for="EditImageUrl"
+              >Enter Image Url here</label
+            >
+            <input
+              placeholder="Enter url here..."
+              type="text"
+              id="EditImageUrl"
+            />
+            <div class="button-wrapper">
+              <div class="submit-adding-category" onclick="addCategory();">
+                Add Category
               </div>
+              <div class="cancel-button">Cancel</div>
             </div>
+          </div>
+          <div class="category-filter">
+                <div class="category-card">
+                  <div class="category-icon">
+                    <img src="/images/laptop.svg" alt="" />
+                  </div>
+                  <div class="category-name">Laptopovi</div>
+                  <div class="category-amount">250</div>
+                </div>
+                <div class="category-card">
+                  <div class="category-icon">
+                    <img src="/images/laptop.svg" alt="" />
+                  </div>
+                  <div class="category-name">Laptopovi</div>
+                  <div class="category-amount">250</div>
+                </div>
+                <div class="category-card">
+                  <div class="category-icon">
+                    <img src="/images/laptop.svg" alt="" />
+                  </div>
+                  <div class="category-name">Laptopovi</div>
+                  <div class="category-amount">250</div>
+                </div>
           </div>
         </div>
         <!-- Sub category component -->
@@ -317,5 +299,6 @@
     <script type="module" src="/backendUI/js/maincontent.js"></script>
     <script src="/backendUI/js/app.js"></script>
     <script type="module" src="/backendUI/js/models/product.js"></script>
+    <script type="module" src="/backendUI/js/models/category.js"></script>
   </body>
 </html>

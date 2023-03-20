@@ -42,7 +42,7 @@
     width: 60%;
     height: 500px;
     display: flex;
-    background-image: url(/Catalog-ui/images/login/blue-background.svg);
+    background-image: url(/images/login/blue-background.svg);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;

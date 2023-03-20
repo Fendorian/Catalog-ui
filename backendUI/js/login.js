@@ -5,21 +5,68 @@ window.addEventListener("load", function () {
   leftSide.style.transform = "translate(0%)";
   myDiv.style.opacity = 1;
 });
-// Create svg so I don't need to embed it to html and doorboy gets in when signed is successful
-function successSignIn() {
-  let object = document.querySelector(".doorboy-svg");
-  let svgDoc = object.contentDocument;
-  let character = svgDoc.getElementById("character");
-  let floor = svgDoc.getElementById("floor");
-  let shadow = svgDoc.getElementById("Path-12");
+function successLogin() 
+{
+  // event.PreventDefault();
+  // Get the input values
+  var username = document.querySelector('.inner-form-bot-input[type="text"]').value;
+  var password = document.querySelector('.inner-form-bot-input[type="password"]').value;
 
-  character.style.transition = "transform 1s ease-in-out";
-  character.style.transform = "translate(30%)";
+  // Create a new XMLHttpRequest object
+  var xhr = new XMLHttpRequest();
 
-  floor.style.display = "none";
+  // Set the request URL and method
+  xhr.open('POST', 'http://localhost/Catalog/api/Logins/Login');
 
-  shadow.style.display = "none";
+  // Set the request header content type
+  xhr.setRequestHeader('Content-Type', 'application/json');
+
+  // Handle the response
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // User is authenticated
+      console.log('User is authenticated');
+
+      var token = xhr.responseText;
+
+      document.cookie = "token=" + token + "; path=/";
+      document.cookie = "username=" + username + "; path=/";
+
+      // Continue with animation
+      let object = document.querySelector(".doorboy-svg");
+      let svgDoc = object.contentDocument;
+      let character = svgDoc.getElementById("character");
+      let floor = svgDoc.getElementById("floor");
+      let shadow = svgDoc.getElementById("Path-12");
+
+      character.style.transition = "transform 1s ease-in-out";
+      character.style.transform = "translate(30%)";
+
+      floor.style.display = "none";
+
+      shadow.style.display = "none";
+
+      setTimeout(function () {
+        window.location.href = 'backIndex.html';
+      }, 1000);
+
+      
+    } else if (xhr.status === 401) {
+      // User is not authenticated
+      console.log('User is not authenticated');
+    }
+  };
+
+  // Create the request body JSON object
+  var requestBody = {
+    username: username,
+    password: password
+  };
+
+  // Send the request
+  xhr.send(JSON.stringify(requestBody));
 }
+
 let login = document.querySelector(".inner-form-login");
 let registration = document.querySelector(".inner-form-registration");
 function shrinkAndShow() {
@@ -56,26 +103,16 @@ function toggle() {
     shrinkAndShow();
   }
 }
-
-function checkLogin(username, password) {
-  return fetch('http://localhost/Catalog/api/Logins/checklogin', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      Username: username,
-      Password: password
-    })
-  })
-  .then(response => {
-    if (response.ok) {
-      return response.text(); // Returns "Login Success"
-    } else {
-      throw new Error('Login Failed');
-    }
-  });
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
 }
+
+
+
 
 
 function register() {
@@ -131,6 +168,7 @@ function register() {
   // send the request to the server
   xhr.send(data);
 }
+// ValidateToken();
 
 /* http://localhost/Catalog/api/Products/GetAllUsers */
 
