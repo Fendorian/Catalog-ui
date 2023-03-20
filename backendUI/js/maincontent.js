@@ -6,61 +6,6 @@ const url = `http://localhost/Catalog/api`
 let overlay = null;
 let newDiv = null;
 
-// Pagination items
-// export function getPagedItems(pageNumber, pageSize) {
-//   let xhr = new XMLHttpRequest();
-//   xhr.open("GET", `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`);
-//   xhr.onload = function () {
-//     if (xhr.status === 200) {
-//       let data = JSON.parse(xhr.responseText);
-
-//       let products = data.map((item) => new Product(
-//         item.ItemID,
-//         item.Name,
-//         item.Abstract,
-//         item.Desc,
-//         item.Price,
-//         item.CategoryID,
-//         item.ImageUrl
-//       ));
-
-//       let productsContainer = document.querySelector(
-//         ".products-card-container"
-//       );
-//       productsContainer.innerHTML = '';
-
-//       products.forEach((product) => {
-//         let productCard = `
-//     <div class="products-card">
-//     <div style="display:none" class="product-id">${product.itemID}</div>
-//       <div class="thumb-image">
-//          <img src="${product.ImageUrl}" alt="" />
-//       </div>
-//       <div class="product-name">${product.name}</div>
-//       <div class="product-category">${product.categoryID}</div>
-//       <div class="three-dots-for-crud" id="three-dots-for-crud">
-//         <img
-//           class="three-dots-svg"
-//           src="/images/elipsis.svg"
-//           alt=""
-//         />
-//         <div class="dropdown">
-//           <a href="#">View</a>
-//           <a href="#">Edit</a>
-//           <a href="#">Delete</a>
-//         </div>
-//       </div>
-//     </div>
-//   `;
-//         productsContainer.insertAdjacentHTML("beforeend", productCard);
-//       });
-//     } else {
-//       console.error("Error fetching items:", xhr.status);
-//     }
-//   };
-//   xhr.send();
-// }
-
 export function getPagedItems(pageNumber, pageSize, containerSelector) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`);
@@ -165,63 +110,6 @@ export function partCategories() {
     });
   });
 }
-// Get item on side
-// export function getItemsPage(pageNumber, pageSize) {
-//   let xhr = new XMLHttpRequest();
-//   xhr.open("GET", `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`);
-//   xhr.onload = function () {
-//     if (xhr.status === 200) {
-//       let data = JSON.parse(xhr.responseText);
-
-//       let products = data.map((item) => new Product(
-//         item.ItemID,
-//         item.Name,
-//         item.Abstract,
-//         item.Desc,
-//         item.Price,
-//         item.CategoryID,
-//         item.ImageUrl
-//       ));
-
-//       let productsFilter = document.querySelector(
-//         ".products-card-filter"
-//       );
-//       console.log(productsFilter);
-//       productsFilter.innerHTML = '';
-
-//       products.forEach((product) => {
-//         console.log(product);
-//         let productCard = `
-//     <div class="products-card">
-//     <div style="display:none" class="product-id">${product.itemID}</div>
-//       <div class="thumb-image">
-//          <img src="${product.ImageUrl}" alt="" />
-//       </div>
-//       <div class="product-name">${product.name}</div>
-//       <div class="product-category">${product.categoryID}</div>
-//       <div class="three-dots-for-crud" id="three-dots-for-crud">
-//         <img
-//           class="three-dots-svg"
-//           src="/images/elipsis.svg"
-//           alt=""
-//         />
-//         <div class="dropdown">
-//           <a href="#">View</a>
-//           <a href="#">Edit</a>
-//           <a href="#">Delete</a>
-//         </div>
-//       </div>
-//     </div>
-//   `;
-//         productsFilter.insertAdjacentHTML("beforeend", productCard);
-//       });
-//     } else {
-//       console.error("Error fetching items:", xhr.status);
-//     }
-//   };
-//   xhr.send();
-// }
-// getItemsPage(1,3);
 // Get category on side
 export function getCategoryPage() {
   let xhr = new XMLHttpRequest();
@@ -302,13 +190,14 @@ export function getItemById(id) {
       let item = data.Table[0];
 
       let product = new Product(
-        item.ItemID,
-        item.Name,
-        item.Abstract,
-        item.Desc,
-        item.Price,
-        item.CategoryID,
-        item.ImageUrl
+         item.ItemID,
+         item.Name,
+         item.Abstract,
+         item.Desc,
+         item.Price,
+         item.CategoryID,
+         item.ImageUrl
+        
       );
 
       const html = `
@@ -382,7 +271,6 @@ let addProductButton = document.querySelector(".add-product");
 let categoryComponentForm = document.querySelector(".category-component-form");
 let addCategoryButton = document.querySelector(".add-category");
 let cancelButton = document.querySelector(".cancel-button");
-let cancelCategoryButton = document.querySelector(".cancel-button");
 // Hide the product-component-form on page load
 productComponentForm.style.overflow = "hidden";
 productComponentForm.style.height = "0";
@@ -404,7 +292,7 @@ addProductButton.addEventListener("click", () => {
   }
 });
 
-addButton.addEventListener("click", () => {
+addCategoryButton.addEventListener("click", () => {
   if (categoryComponentForm.classList.contains("hidden")) {
     categoryComponentForm.classList.remove("hidden");
     categoryComponentForm.style.transition = "height 0.5s ease-in-out";
@@ -421,10 +309,12 @@ cancelButton.addEventListener("click", () => {
     productComponentForm.classList.remove("hidden");
     productComponentForm.style.transition = "height 0.5s ease-in-out";
     productComponentForm.style.height = "100%";
+    console.log('radi1');
   } else {
     productComponentForm.style.height = "0";
     setTimeout(() => {
       productComponentForm.classList.add("hidden");
     }, 500);
+    console.log('radi2');
   }
 });
