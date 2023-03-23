@@ -318,3 +318,6 @@ cancelButton.addEventListener("click", () => {
     console.log('radi2');
   }
 });
+
+
+// Search function
