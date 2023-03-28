@@ -6,6 +6,116 @@ const url = `http://localhost/Catalog/api`
 let overlay = null;
 let newDiv = null;
 
+// export function getPagedItems(pageNumber, pageSize, containerSelector, categoryId = null) {
+//   let xhr = new XMLHttpRequest();
+//   let requestUrl = `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+
+//   if (categoryId) {
+//     requestUrl = `${url}/Products/GetItemByCategory?categoryId=${categoryId}`;
+//   }
+//   xhr.open("GET", requestUrl);
+//   xhr.onload = function () {
+//     if (xhr.status === 200) {
+//       let data = JSON.parse(xhr.responseText);
+
+//       let products = data.map((item) => new Product(
+//         item.ItemID,
+//         item.Name,
+//         item.Abstract,
+//         item.Desc,
+//         item.Price,
+//         item.CategoryID,
+//         item.ImageUrl
+//       ));
+
+//       let productsContainer = document.querySelector(containerSelector);
+//       console.log(productsContainer);
+//       productsContainer.innerHTML = '';
+
+//       products.forEach((product) => {
+//         let productCard = `
+//           <div class="products-card">
+//             <div style="display:none" class="product-id">${product.itemID}</div>
+//             <div class="thumb-image">
+//               <img src="${product.ImageUrl}" alt="" />
+//             </div>
+//             <div class="product-name">${product.name}</div>
+//             <div class="product-category">${product.categoryID}</div>
+//             <div class="three-dots-for-crud" id="three-dots-for-crud">
+//               <img class="three-dots-svg" src="/images/elipsis.svg" alt="" />
+//               <div class="dropdown">
+//                 <a href="#">View</a>
+//                 <a href="#">Edit</a>
+//                 <a href="#">Delete</a>
+//               </div>
+//             </div>
+//           </div>
+//         `;
+//         productsContainer.insertAdjacentHTML("beforeend", productCard);
+//       });
+//     } else {
+//       console.error("Error fetching items:", xhr.status);
+//     }
+//   };
+//   xhr.send();
+// }
+// function onCategoryClick(categoryId) {
+//   const pageNumber = 1;
+//   const pageSize = 10; // Adjust this value to the desired page size
+//   const containerSelector = ".products-container"; // Adjust this value to match your products container selector
+
+//   getPagedItems(pageNumber, pageSize, containerSelector, categoryId);
+// }
+// const categoryElements = document.querySelectorAll(".category-card");
+// categoryElements.forEach((categoryElement) => {
+//   categoryElement.addEventListener("click", () => {
+//     const categoryId = categoryElement.dataset.categoryId;
+//     console.log('uspesno kliknut');
+//     onCategoryClick(categoryId);
+//   });
+// });
+
+function generatePagination(totalItems, itemsPerPage, containerSelector) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const paginationContainer = document.querySelector(containerSelector);
+  let paginationHTML = '';
+
+  paginationHTML += '<a href="#" class="pagination-arrow arrow-left"><i class="fa fa-angle-left"></i></a>';
+  paginationHTML += '<div class="page-numbers">';
+
+  for (let i = 1; i <= totalPages; i++) {
+    paginationHTML += `<a href="#" class="page-number${i === 1 ? ' active' : ''}" data-page="${i}">${i}</a>`;
+  }
+
+  paginationHTML += '</div>';
+  paginationHTML += '<a href="#" class="pagination-arrow arrow-right"><i class="fa fa-angle-right"></i></a>';
+
+  paginationContainer.innerHTML = paginationHTML;
+
+  // Attach click event listeners for the new page numbers
+  const pageNumbers = paginationContainer.querySelectorAll('.page-number');
+  pageNumbers.forEach((pageNumber) => {
+    pageNumber.addEventListener('click', (e) => {
+      e.preventDefault();
+      const newPage = parseInt(e.target.dataset.page);
+      getPagedItems(newPage, itemsPerPage, '.products-container', categoryId);
+      updateActivePageNumber(paginationContainer, newPage);
+    });
+  });
+}
+
+function updateActivePageNumber(paginationContainer, newPage) {
+  const activePageNumber = paginationContainer.querySelector('.page-number.active');
+  const targetPageNumber = paginationContainer.querySelector(`.page-number[data-page="${newPage}"]`);
+
+  if (activePageNumber) {
+    activePageNumber.classList.remove('active');
+  }
+  if (targetPageNumber) {
+    targetPageNumber.classList.add('active');
+  }
+}
+
 export function getPagedItems(pageNumber, pageSize, containerSelector, categoryId = null) {
   let xhr = new XMLHttpRequest();
   let requestUrl = `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`;
@@ -17,8 +127,8 @@ export function getPagedItems(pageNumber, pageSize, containerSelector, categoryI
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
-
-      let products = data.map((item) => new Product(
+      generatePagination(data.totalItems, pageSize, '.pagination-container');
+      let products = data.items.map((item) => new Product(
         item.ItemID,
         item.Name,
         item.Abstract,

@@ -1,5 +1,5 @@
 h2 {
-  color: white;
+  color: #F3f3f3;
 }
 .global-container {
   display: flex;
@@ -156,10 +156,6 @@ input[type="text"] ::placeholder {
 .category-component {
   display: flex;
   flex-direction: column;
-}
-.caregory-component-header {
-  display: flex ;
-  align-items: center;
 }
 .category-card {
   flex-shrink: 0;

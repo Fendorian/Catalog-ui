@@ -37,7 +37,9 @@
                 class="inner-form-bot-input"
                 type="password"
               />
-              <div class="inner-form-bot-button" onclick="successLogin();">LOGIN</div>
+              <div class="inner-form-bot-button" onclick="successLogin();">
+                <div class="inner-form-bot-button-text">LOGIN</div>
+              </div>
             </div>
           </div>
           <div class="inner-form inner-form-registration hidden">
@@ -70,22 +72,25 @@
                 class="inner-form-bot-input"
                 type="password"
               />
-              <div class="inner-form-bot-bottom" onclick="register();">SIGN IN</div>
+              <div class="inner-form-bot-button" onclick="register();">
+                <div class="inner-form-bot-button-text">SIGN IN</div>
+              </div>
             </div>
           </div>
           <div class="outer-form-login">
             <a class="outer-form-account" href="#"
               >Don't have an account yet?</a
             >
-            <a class="outer-form-missing" href="#" onclick="toggle();">Create an account</a>
+            <a class="outer-form-missing" href="#" onclick="toggle();"
+              >Create an account</a
+            >
           </div>
           <div class="outer-form-registration">
-            <a class="outer-form-account" href="#"
-              >Have an account?</a
+            <a class="outer-form-account" href="#">Have an account?</a>
+            <a class="outer-form-missing" href="#" onclick="toggle();"
+              >Switch to login</a
             >
-            <a class="outer-form-missing" href="#" onclick="toggle();">Switch to login</a>
           </div>
-
         </div>
       </div>
     </div>

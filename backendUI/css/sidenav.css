@@ -36,6 +36,9 @@
 .link-wrapper:hover {
     background-color: #0D2B32;
 }
+.selected {
+    background-color: #0D2B32;
+}
 .side-nav-container {
     display: flex;
     padding-left: 20px;
@@ -59,15 +62,6 @@
 #home {
     display: block;
 }
-#product {
+#product, #category, #sub-category {
     display: none;
-}
-#category {
-    display: none;
-}
-#sub-category {
-    display: none;
-}
-.selected {
-    background-color: #0D2B32;
 }

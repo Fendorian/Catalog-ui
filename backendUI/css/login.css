@@ -12,6 +12,18 @@
     height: 100vh;
     background-color: #467d7d;
   }
+  input[type="text"]::placeholder,
+  input[type="password"]::placeholder,
+  input[type="email"]::placeholder,
+  input[type="number"]::placeholder 
+  {
+    padding-left: 15px;
+  }
+  /* Shrinking css */
+  .inner-form {
+    transition: all 0.5s ease-in-out;
+  }
+  
   .hidden {
     display: none;
   }
@@ -29,14 +41,6 @@
     height: 500px;
     border-radius: 4%;
     background-color: #ffba33;
-  }
-  .right-side-login {
-    opacity: 0;
-    transition: opacity 1s;
-    width: 65%;
-    height: 400px;
-    display: flex;
-    justify-content: center;
   }
   .left-side {
     width: 60%;
@@ -56,45 +60,20 @@
     position: absolute;
     top: 15%;
   }
+  .right-side-login {
+    opacity: 0;
+    transition: opacity 1s;
+    width: 65%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+  }
   .inner-form-login {
     width: 300px;
     height: 300px;
     background-color: #fff7ef;
     box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.3);
     border-radius: 4%;
-  }
-  .inner-form-registration {
-    width: 300px;
-    height: 200px;
-    background-color: #fff7ef;
-    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.3);
-    border-radius: 4%;
-  }
-  .inner-form-bot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 260px;
-  }
-  .outer-form-login {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 1.5;
-    margin-top: 40px;
-  }
-  .outer-form-registration {
-    width: 100%;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    line-height: 1.5;
-    margin-top: 40px;
-  }
-  .inner-form-registration > .inner-form-bot > .inner-form-bot-input {
-    height: 30px;
   }
   .inner-form-top {
     display: flex;
@@ -113,25 +92,15 @@
     text-decoration: none;
     color: lightslategray;
   }
-  .inner-form-bot-button {
-    width: 188px;
-    height: 36px;
-    color: #f5f5f5;
-    background-color: #1a535c;
-    border-radius: 4%;
-    border: none;
-  }
-  .outer-form-account {
-    color: #f5f5f5;
-    text-decoration: none;
-  }
-  .outer-form-missing {
-    color: #1a535c;
-    text-decoration: none;
+  .inner-form-bot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 260px;
   }
   .inner-form-bot-input {
     background-color: #dcd6d0;
-    /* border-color: #F5F5F5; */
     border: none;
     border-radius: 4%;
     width: 85%;
@@ -140,16 +109,57 @@
   .inner-form-bot-input .form-container {
     align-self: center;
   }
-  
-  input[type="text"]::placeholder,
-  input[type="password"]::placeholder,
-  input[type="email"]::placeholder,
-  input[type="number"]::placeholder 
-  {
-    padding-left: 15px;
+  .inner-form-registration > .inner-form-bot > .inner-form-bot-input {
+    height: 30px;
   }
-  /* Shrinking css */
-  .inner-form {
-    transition: all 0.5s ease-in-out;
+
+  .inner-form-bot-button {
+    width: 188px;
+    height: 36px;
+    color: #f5f5f5;
+    background-color: #1a535c;
+    border-radius: 4%;
+    border: none;
+    text-align: center;
   }
+  .inner-form-bot-button-text {
+    margin: 9px;
+  }
+  .inner-form-registration {
+    width: 300px;
+    height: 200px;
+    background-color: #fff7ef;
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.3);
+    border-radius: 4%;
+  }
+
+  .outer-form-login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.5;
+    margin-top: 40px;
+  }
+  .outer-form-registration {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.5;
+    margin-top: 40px;
+  }
+
+  .outer-form-account {
+    color: #f5f5f5;
+    text-decoration: none;
+  }
+  .outer-form-missing {
+    color: #1a535c;
+    text-decoration: none;
+  }
+
+
+
+
   
