@@ -132,7 +132,6 @@
             <input type="text" name="" id="CreateID" style="display: none" />
             <label for="CreateName">Name</label>
             <input
-              value="testName"
               placeholder="Enter name here..."
               id="CreateName"
               type="text"
@@ -163,9 +162,9 @@
             />
             <label for="CreateCategoryID">Pick category:</label>
             <select id="CreateCategoryID" name="CreateCategoryID">
-              <option value="1">Laptopovi</option>
+              <!-- <option value="1">Laptopovi</option>
               <option value="2">Monitori</option>
-              <option value="3">PC</option>
+              <option value="3">PC</option> -->
             </select>
             <div class="button-wrapper">
               <div class="submit-adding-product" onclick="createItem();">
@@ -236,23 +235,22 @@
           </div>
           <div id="add-category-form" class="category-component-form hidden">
             <input type="text" name="" id="EditID" style="display: none" />
-            <label for="EditName">Name</label>
+            <label id="EditID" for="CategoryName">Name</label>
             <input
-              value="testName"
               placeholder="Enter category name here..."
-              id="EditName"
+              id="CategoryName"
               type="text"
             />
-            <label value="testUrl.png" for="EditImageUrl"
+            <!-- <label value="testUrl.png" for="EditImageUrl"
               >Enter Image Url here</label
-            >
-            <input
+            > -->
+            <!-- <input
               placeholder="Enter url here..."
               type="text"
               id="EditImageUrl"
-            />
+            /> -->
             <div class="button-wrapper">
-              <div class="submit-adding-category" onclick="addCategory();">
+              <div class="submit-adding-category">
                 Add Category
               </div>
               <div class="cancel-button">Cancel</div>

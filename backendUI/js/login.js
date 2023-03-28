@@ -5,86 +5,11 @@ window.addEventListener("load", function () {
   leftSide.style.transform = "translate(0%)";
   myDiv.style.opacity = 1;
 });
-// function successLogin() 
-// {
-//   // Get the input values
-//   var username = document.querySelector('.inner-form-bot-input[type="text"]').value;
-//   var password = document.querySelector('.inner-form-bot-input[type="password"]').value;
-
-//   // Create a new XMLHttpRequest object
-//   var xhr = new XMLHttpRequest();
-
-//   // Set the request URL and method
-//   xhr.open('POST', 'http://localhost/Catalog/api/Logins/Login');
-
-//   // Set the request header content type
-//   xhr.setRequestHeader('Content-Type', 'application/json');
-
-//   // Handle the response
-//   xhr.onload = function () {
-//     if (xhr.status === 200) {
-//       // User is authenticated
-//       console.log('User is authenticated');
-
-//       var token = xhr.responseText;
-
-//       document.cookie = "token=" + token + "; path=/";
-//       document.cookie = "username=" + username + "; path=/";
-
-//       // Continue with animation
-//       let object = document.querySelector(".doorboy-svg");
-//       let svgDoc = object.contentDocument;
-//       let character = svgDoc.getElementById("character");
-//       let floor = svgDoc.getElementById("floor");
-//       let shadow = svgDoc.getElementById("Path-12");
-
-//       character.style.transition = "transform 1s ease-in-out";
-//       character.style.transform = "translate(30%)";
-
-//       floor.style.display = "none";
-
-//       shadow.style.display = "none";
-
-//       setTimeout(function () {
-//         window.location.href = 'backIndex.html';
-//       }, 1000);
-
-      
-//     } else if (xhr.status === 401) {
-//       // User is not authenticated
-//       console.log('User is not authenticated');
-//     }
-//   };
-
-//   // Create the request body JSON object
-//   var requestBody = {
-//     username: username,
-//     password: password
-//   };
-
-//   // Send the request
-//   xhr.send(JSON.stringify(requestBody));
-// }
 function successLogin() 
 {
   // Get the input values
   var username = document.querySelector('.inner-form-bot-input[type="text"]').value;
   var password = document.querySelector('.inner-form-bot-input[type="password"]').value;
-
-  // Define the regular expressions for username and password validation
-  var usernameRegex = /^[a-zA-Z0-9._-]+$/g;
-  var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()-_+=~`]{8,}$/g;
-
-  // Validate the input values against the regular expressions
-  var isUsernameValid = usernameRegex.test(username);
-  var isPasswordValid = passwordRegex.test(password);
-
-  // If either the username or password is invalid, display an error message and return
-  if (!isUsernameValid || !isPasswordValid) {
-    var errorMessage = document.querySelector('.error-message');
-    errorMessage.style.display = 'block';
-    return;
-  }
 
   // Create a new XMLHttpRequest object
   var xhr = new XMLHttpRequest();
@@ -141,6 +66,7 @@ function successLogin()
   xhr.send(JSON.stringify(requestBody));
 }
 
+
 let login = document.querySelector(".inner-form-login");
 let registration = document.querySelector(".inner-form-registration");
 function shrinkAndShow() {
@@ -165,11 +91,9 @@ function toggle() {
   if (login.style.display === "none") {
     loginInfo.style.display = "flex";
     registerInfo.style.display = "none";
-    console.log("1 je");
   } else {
     loginInfo.style.display = "none";
     registerInfo.style.display = "flex";
-    console.log("nije 1");
   }
   if (login.style.display === "none") {
     revertToLogin();

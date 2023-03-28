@@ -398,3 +398,20 @@ margin-right: 120px;
 .category-filter {
   display: flex;
 }
+.product-picture {
+  width: 100%;
+  height: 400px;
+  border-radius: 5px 5px 0px 0px;
+}
+.cross-svg {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.product-title {
+  font-size: 24px;
+  text-align: center;
+}
+.product-abstract {
+  border: 2px solid black;
+}

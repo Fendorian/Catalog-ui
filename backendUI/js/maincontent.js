@@ -6,9 +6,14 @@ const url = `http://localhost/Catalog/api`
 let overlay = null;
 let newDiv = null;
 
-export function getPagedItems(pageNumber, pageSize, containerSelector) {
+export function getPagedItems(pageNumber, pageSize, containerSelector, categoryId = null) {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  let requestUrl = `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+
+  if (categoryId) {
+    requestUrl = `${url}/Products/GetItemByCategory?categoryId=${categoryId}`;
+  }
+  xhr.open("GET", requestUrl);
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
@@ -54,9 +59,24 @@ export function getPagedItems(pageNumber, pageSize, containerSelector) {
   };
   xhr.send();
 }
+function onCategoryClick(categoryId) {
+  const pageNumber = 1;
+  const pageSize = 10; // Adjust this value to the desired page size
+  const containerSelector = ".products-container"; // Adjust this value to match your products container selector
+
+  getPagedItems(pageNumber, pageSize, containerSelector, categoryId);
+}
+const categoryElements = document.querySelectorAll(".category-card");
+categoryElements.forEach((categoryElement) => {
+  categoryElement.addEventListener("click", () => {
+    const categoryId = categoryElement.dataset.categoryId;
+    console.log('uspesno kliknut');
+    onCategoryClick(categoryId);
+  });
+});
 
 // Get all categories
-export function getCategoryById() {
+export function getAllCategories() {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", `http://localhost/Catalog/api/Category/GetAllCategories`);
   xhr.onload = function () {
@@ -66,6 +86,25 @@ export function getCategoryById() {
         category.CategoryID,
         category.CategoryName
       ));
+
+        // Generate select element with options
+        let selectElement = document.createElement("select");
+        selectElement.setAttribute("id", "CreateCategoryID");
+        selectElement.setAttribute("name", "CreateCategoryID");
+  
+        categories.forEach((category) => {
+          let optionElement = document.createElement("option");
+          optionElement.setAttribute("value", category.categoryID);
+          optionElement.textContent = category.categoryName;
+          selectElement.appendChild(optionElement);
+        });
+  
+        // Insert select element before category container
+        let categorySelect = document.querySelector(
+          "#CreateCategoryID"
+        );
+        categorySelect.insertAdjacentElement("beforebegin", selectElement);
+  
 
       // Loop through the products and do something with each one
       let categoryContainer = document.querySelector(
@@ -152,9 +191,8 @@ export function getCategoryPage() {
   xhr.send();
 }
 getCategoryPage();
-getCategoryById();
-getPagedItems(1,3, '.products-card-container');
-getPagedItems(1,3, '.products-card-filter');
+getAllCategories();
+
 let items = document.querySelectorAll(".products-card");
 
 // Add an event listener to the products container
@@ -204,15 +242,16 @@ export function getItemById(id) {
           <div class="overlay">
             <div class="single-component">
             <div class="cross-svg">
-            <img class="cross" src="/images/cross.svg">
+            <img class="cross" src="/images/corss.svg">
             </div>
               <div class="picture-container">
-                <img src="${product.imageUrl}" alt="">
+                <img class="product-picture" src="/images/products/${product.imageUrl}" alt="">
               </div>
               <div class="product-title">${product.name}</div>
               <div class="product-category">${product.categoryID}</div>
-              <div class="product-delete">${product.price}</div>
-              <div class="product-delete">${product.abstract}</div>
+              <div class="product-abstract">${product.abstract}</div>
+              <div class="product-price">${product.price}</div>
+              
             </div>
           </div>
         `;
@@ -320,4 +359,130 @@ cancelButton.addEventListener("click", () => {
 });
 
 
-// Search function
+// Pagination
+document.addEventListener("DOMContentLoaded", () => {
+  const pageNumberLinks = document.querySelectorAll(".page-number");
+  const arrowLeft = document.querySelector(".arrow-left");
+  const arrowRight = document.querySelector(".arrow-right");
+
+  pageNumberLinks.forEach((link) =>
+    link.addEventListener("click", handlePageNumberClick)
+  );
+  arrowLeft.addEventListener("click", handleArrowLeftClick);
+  arrowRight.addEventListener("click", handleArrowRightClick);
+
+  // Initialize the first page
+  getPagedItems(1, 7, ".products-card-container");
+});
+
+let currentPage = 1;
+
+function handlePageNumberClick(event) {
+  event.preventDefault();
+  const newPage = parseInt(event.target.textContent);
+  changePage(newPage);
+}
+
+function handleArrowLeftClick(event) {
+  event.preventDefault();
+  if (currentPage > 1) {
+    changePage(currentPage - 1);
+  }
+}
+
+function handleArrowRightClick(event) {
+  event.preventDefault();
+  const lastPage = parseInt(
+    document.querySelector(".page-numbers").lastElementChild.textContent
+  );
+  if (currentPage < lastPage) {
+    changePage(currentPage + 1);
+  }
+}
+
+function changePage(newPage) {
+  // Update the currentPage variable
+  currentPage = newPage;
+
+  // Remove the active class from the current active page number
+  document
+    .querySelector(".page-number.active")
+    .classList.remove("active");
+
+  // Add the active class to the new active page number
+  document
+    .querySelector(`.page-number:nth-child(${newPage})`)
+    .classList.add("active");
+
+  // Fetch the items for the new page
+  getPagedItems(currentPage, 7, ".products-card-container");
+}
+
+
+
+// Category input
+
+let submitCategory = document.querySelector('.submit-adding-category');
+submitCategory.addEventListener('click', function submitCategory() {
+  let categoryName = document.getElementById('CategoryName').value;
+  console.log(categoryName);
+  fetch(url + `/Category/CreateCategory`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      categoryName: categoryName
+    })
+  })
+  .then(response => response.json())
+  .then(category => {
+    console.log(`Kategorija ${category} uspesno dodata`);
+  
+    // Reset form
+    document.querySelector('#add-category-form').classList.add('hidden');
+    document.querySelector('#CategoryName').value = '';
+  })
+  .catch(error => console.error(error));
+});
+
+// Get categoryById
+export function getCategoryById(categoryID) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", `http://localhost/Catalog/api/Category/GetCategoryById/` + categoryID);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      let data = JSON.parse(xhr.responseText);
+      let categories = data.Table.map((category) => new Category(
+        category.CategoryID,
+        category.CategoryName
+      ));
+
+      // Loop through the products and do something with each one
+      let categoryContainer = document.querySelector(
+        ".category-card-container"
+      );
+      categoryContainer.innerHTML = '';
+
+      categories.forEach((category) => {
+        let categoryCard = `
+    <div class="category-card">
+    <div style="display:none" class="product-id">${category.itemID}</div>
+      <div class="thumb-image">
+         <img src="${category.ImageUrl}" alt="" />
+      </div>
+      <div class="category-name">${category.categoryName}</div>
+      <div style="display:none" class="category-id">${category.categoryID}</div>
+    </div>
+  `;
+        categoryContainer.insertAdjacentHTML("beforeend", categoryCard);
+      });
+    } else {
+      console.error("Error fetching items:", xhr.status);
+    }
+  };
+  xhr.send();
+}
+// getCategoryById(9);
+
+let categorySelect = document.getElementById('CreateCategoryID');
