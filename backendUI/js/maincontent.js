@@ -6,6 +6,7 @@ const url = `http://localhost/Catalog/api`
 let overlay = null;
 let newDiv = null;
 
+// Display of items through pagination
 export function getPagedItems(pageNumber, pageSize, containerSelector, categoryId = null) {
   let xhr = new XMLHttpRequest();
   let requestUrl = `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`;
@@ -28,7 +29,6 @@ export function getPagedItems(pageNumber, pageSize, containerSelector, categoryI
         item.ImageUrl
       ));
       let productsContainer = document.querySelector(containerSelector);
-      console.log(productsContainer);
       productsContainer.innerHTML = '';
 
       products.forEach((product) => {
@@ -62,7 +62,7 @@ export function getPagedItems(pageNumber, pageSize, containerSelector, categoryI
 // Get all categories
 export function getAllCategories() {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost/Catalog/api/Category/GetAllCategories`);
+  xhr.open("GET", `${url}/Category/GetAllCategories`);
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
@@ -109,7 +109,7 @@ export function getAllCategories() {
     </div>
   `;
 
-  
+  // Get items with clicked category
   let cardWrapper = document.createElement('div');
   cardWrapper.innerHTML = categoryCard.trim();
   let cardElement = cardWrapper.firstChild;
@@ -198,7 +198,7 @@ export function partCategories() {
 // Get category on side
 export function getCategoryPage() {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost/Catalog/api/Category/GetAllCategories`);
+  xhr.open("GET", `${url}/Category/GetAllCategories`);
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
@@ -292,7 +292,7 @@ export function deleteItem(itemID) {
 }
 export function getItemById(id) {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost/Catalog/api/Products/GetItemById/${id}`);
+  xhr.open("GET", `${url}/Products/GetItemById/${id}`);
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
@@ -532,7 +532,7 @@ submitCategory.addEventListener('click', function submitCategory() {
 // Get categoryById
 export function getCategoryById(categoryID) {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost/Catalog/api/Category/GetCategoryById/` + categoryID);
+  xhr.open("GET", `${url}/Category/GetCategoryById/` + categoryID);
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
