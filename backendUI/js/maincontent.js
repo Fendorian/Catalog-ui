@@ -459,17 +459,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let currentPage = 1;
+let currentCategory = null;
 
 function handlePageNumberClick(event) {
   event.preventDefault();
   const newPage = parseInt(event.target.textContent);
-  changePage(newPage);
+  changePage(newPage, currentCategory);
 }
 
 function handleArrowLeftClick(event) {
   event.preventDefault();
   if (currentPage > 1) {
-    changePage(currentPage - 1);
+    changePage(currentPage - 1, currentCategory);
   }
 }
 
@@ -479,13 +480,14 @@ function handleArrowRightClick(event) {
     document.querySelector(".page-numbers").lastElementChild.textContent
   );
   if (currentPage < lastPage) {
-    changePage(currentPage + 1);
+    changePage(currentPage + 1, currentCategory);
   }
 }
 
-function changePage(newPage) {
+function changePage(newPage, categoryId) {
   // Update the currentPage variable
   currentPage = newPage;
+  currentCategory = categoryId;
 
   // Remove the active class from the current active page number
   document
@@ -498,7 +500,7 @@ function changePage(newPage) {
     .classList.add("active");
 
   // Fetch the items for the new page
-  getPagedItems(currentPage, 7, ".products-card-container", null);
+  getPagedItems(currentPage, 7, ".products-card-container", currentCategory);
 }
 
 
