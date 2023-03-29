@@ -6,116 +6,6 @@ const url = `http://localhost/Catalog/api`
 let overlay = null;
 let newDiv = null;
 
-// export function getPagedItems(pageNumber, pageSize, containerSelector, categoryId = null) {
-//   let xhr = new XMLHttpRequest();
-//   let requestUrl = `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`;
-
-//   if (categoryId) {
-//     requestUrl = `${url}/Products/GetItemByCategory?categoryId=${categoryId}`;
-//   }
-//   xhr.open("GET", requestUrl);
-//   xhr.onload = function () {
-//     if (xhr.status === 200) {
-//       let data = JSON.parse(xhr.responseText);
-
-//       let products = data.map((item) => new Product(
-//         item.ItemID,
-//         item.Name,
-//         item.Abstract,
-//         item.Desc,
-//         item.Price,
-//         item.CategoryID,
-//         item.ImageUrl
-//       ));
-
-//       let productsContainer = document.querySelector(containerSelector);
-//       console.log(productsContainer);
-//       productsContainer.innerHTML = '';
-
-//       products.forEach((product) => {
-//         let productCard = `
-//           <div class="products-card">
-//             <div style="display:none" class="product-id">${product.itemID}</div>
-//             <div class="thumb-image">
-//               <img src="${product.ImageUrl}" alt="" />
-//             </div>
-//             <div class="product-name">${product.name}</div>
-//             <div class="product-category">${product.categoryID}</div>
-//             <div class="three-dots-for-crud" id="three-dots-for-crud">
-//               <img class="three-dots-svg" src="/images/elipsis.svg" alt="" />
-//               <div class="dropdown">
-//                 <a href="#">View</a>
-//                 <a href="#">Edit</a>
-//                 <a href="#">Delete</a>
-//               </div>
-//             </div>
-//           </div>
-//         `;
-//         productsContainer.insertAdjacentHTML("beforeend", productCard);
-//       });
-//     } else {
-//       console.error("Error fetching items:", xhr.status);
-//     }
-//   };
-//   xhr.send();
-// }
-// function onCategoryClick(categoryId) {
-//   const pageNumber = 1;
-//   const pageSize = 10; // Adjust this value to the desired page size
-//   const containerSelector = ".products-container"; // Adjust this value to match your products container selector
-
-//   getPagedItems(pageNumber, pageSize, containerSelector, categoryId);
-// }
-// const categoryElements = document.querySelectorAll(".category-card");
-// categoryElements.forEach((categoryElement) => {
-//   categoryElement.addEventListener("click", () => {
-//     const categoryId = categoryElement.dataset.categoryId;
-//     console.log('uspesno kliknut');
-//     onCategoryClick(categoryId);
-//   });
-// });
-
-function generatePagination(totalItems, itemsPerPage, containerSelector) {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const paginationContainer = document.querySelector(containerSelector);
-  let paginationHTML = '';
-
-  paginationHTML += '<a href="#" class="pagination-arrow arrow-left"><i class="fa fa-angle-left"></i></a>';
-  paginationHTML += '<div class="page-numbers">';
-
-  for (let i = 1; i <= totalPages; i++) {
-    paginationHTML += `<a href="#" class="page-number${i === 1 ? ' active' : ''}" data-page="${i}">${i}</a>`;
-  }
-
-  paginationHTML += '</div>';
-  paginationHTML += '<a href="#" class="pagination-arrow arrow-right"><i class="fa fa-angle-right"></i></a>';
-
-  paginationContainer.innerHTML = paginationHTML;
-
-  // Attach click event listeners for the new page numbers
-  const pageNumbers = paginationContainer.querySelectorAll('.page-number');
-  pageNumbers.forEach((pageNumber) => {
-    pageNumber.addEventListener('click', (e) => {
-      e.preventDefault();
-      const newPage = parseInt(e.target.dataset.page);
-      getPagedItems(newPage, itemsPerPage, '.products-container', categoryId);
-      updateActivePageNumber(paginationContainer, newPage);
-    });
-  });
-}
-
-function updateActivePageNumber(paginationContainer, newPage) {
-  const activePageNumber = paginationContainer.querySelector('.page-number.active');
-  const targetPageNumber = paginationContainer.querySelector(`.page-number[data-page="${newPage}"]`);
-
-  if (activePageNumber) {
-    activePageNumber.classList.remove('active');
-  }
-  if (targetPageNumber) {
-    targetPageNumber.classList.add('active');
-  }
-}
-
 export function getPagedItems(pageNumber, pageSize, containerSelector, categoryId = null) {
   let xhr = new XMLHttpRequest();
   let requestUrl = `${url}/Products/GetPagedProducts?pageNumber=${pageNumber}&pageSize=${pageSize}`;
@@ -127,8 +17,8 @@ export function getPagedItems(pageNumber, pageSize, containerSelector, categoryI
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
-      generatePagination(data.totalItems, pageSize, '.pagination-container');
-      let products = data.items.map((item) => new Product(
+      console.log('API response data:', data);
+      let products = data.Table.map((item) => new Product(
         item.ItemID,
         item.Name,
         item.Abstract,
@@ -137,7 +27,6 @@ export function getPagedItems(pageNumber, pageSize, containerSelector, categoryI
         item.CategoryID,
         item.ImageUrl
       ));
-
       let productsContainer = document.querySelector(containerSelector);
       console.log(productsContainer);
       productsContainer.innerHTML = '';
@@ -169,21 +58,6 @@ export function getPagedItems(pageNumber, pageSize, containerSelector, categoryI
   };
   xhr.send();
 }
-function onCategoryClick(categoryId) {
-  const pageNumber = 1;
-  const pageSize = 10; // Adjust this value to the desired page size
-  const containerSelector = ".products-container"; // Adjust this value to match your products container selector
-
-  getPagedItems(pageNumber, pageSize, containerSelector, categoryId);
-}
-const categoryElements = document.querySelectorAll(".category-card");
-categoryElements.forEach((categoryElement) => {
-  categoryElement.addEventListener("click", () => {
-    const categoryId = categoryElement.dataset.categoryId;
-    console.log('uspesno kliknut');
-    onCategoryClick(categoryId);
-  });
-});
 
 // Get all categories
 export function getAllCategories() {
@@ -202,6 +76,7 @@ export function getAllCategories() {
         selectElement.setAttribute("id", "CreateCategoryID");
         selectElement.setAttribute("name", "CreateCategoryID");
   
+
         categories.forEach((category) => {
           let optionElement = document.createElement("option");
           optionElement.setAttribute("value", category.categoryID);
@@ -233,6 +108,18 @@ export function getAllCategories() {
       <div style="display:none" class="category-id">${category.categoryID}</div>
     </div>
   `;
+
+  
+  let cardWrapper = document.createElement('div');
+  cardWrapper.innerHTML = categoryCard.trim();
+  let cardElement = cardWrapper.firstChild;
+ console.log(cardElement);
+  cardElement.addEventListener('click', () => {
+    console.log(category.categoryID);
+    getPagedItems(1, 7, '.products-card-container', category.categoryID);
+  });
+
+  categoryContainer.appendChild(cardElement);
         categoryContainer.insertAdjacentHTML("beforeend", categoryCard);
       });
     } else {
@@ -241,7 +128,56 @@ export function getAllCategories() {
   };
   xhr.send();
 }
+export function getItemByCategory() {
+  let xhr = new XMLHttpRequest();
+  let requestUrl = `${url}/Products/GetItemByCategory?categoryId=${categoryId}`;
 
+  xhr.open("GET", requestUrl);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      let data = JSON.parse(xhr.responseText);
+      console.log('API response data:', data);
+      let products = data.map((item) => new Product(
+        item.ItemID,
+        item.Name,
+        item.Abstract,
+        item.Desc,
+        item.Price,
+        item.CategoryID,
+        item.ImageUrl
+      ));
+      let productsContainer = document.querySelector(containerSelector);
+      console.log(productsContainer);
+      productsContainer.innerHTML = '';
+
+      products.forEach((product) => {
+        let productCard = `
+          <div class="products-card">
+            <div style="display:none" class="product-id">${product.itemID}</div>
+            <div class="thumb-image">
+              <img src="${product.ImageUrl}" alt="" />
+            </div>
+            <div class="product-name">${product.name}</div>
+            <div class="product-category">${product.categoryID}</div>
+            <div class="three-dots-for-crud" id="three-dots-for-crud">
+              <img class="three-dots-svg" src="/images/elipsis.svg" alt="" />
+              <div class="dropdown">
+                <a href="#">View</a>
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+              </div>
+            </div>
+          </div>
+        `;
+        productsContainer.insertAdjacentHTML("beforeend", productCard);
+      });
+    } else {
+      console.error("Error fetching items:", xhr.status);
+    }
+  };
+  xhr.send();
+
+}
 // Selected categories
 export function partCategories() {
   let categoryCards = document.querySelectorAll(".category-card");
@@ -271,13 +207,25 @@ export function getCategoryPage() {
         category.CategoryName
       ));
 
+   
       // Loop through the products and do something with each one
       let categoryFilter = document.querySelector(
         ".category-filter"
       );
       categoryFilter.innerHTML = '';
+   // Get All categories card
+   let allCategoriesCard = `
+   <div class="category-card all-categories">
+     <div class="thumb-image">
+        <img src="path/to/default/image.jpg" alt="" />
+     </div>
+     <div class="category-name">All categories</div>
+     <div style="display:none" class="category-id">all</div>
+   </div>
+ `;
 
-      
+
+      categoryFilter.insertAdjacentHTML("beforeend", allCategoriesCard);
 
       categories.forEach((category) => {
         let categoryCard = `
@@ -328,10 +276,22 @@ items.forEach((item, index) => {
     this.classList.add("selected");
   });
 });
-
+export function deleteItem(itemID) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("DELETE", `${url}/Products/DeleteItem?id=${itemID}`);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("Item deleted successfully");
+      // Refresh the list of items or close the single display
+    } else {
+      console.error("Error deleting item:", xhr.status);
+    }
+  };
+  xhr.send();
+}
 export function getItemById(id) {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", `http://localhost/Catalog/api/Products/GetItemById?id=${id}`);
+  xhr.open("GET", `http://localhost/Catalog/api/Products/GetItemById/${id}`);
   xhr.onload = function () {
     if (xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
@@ -361,6 +321,9 @@ export function getItemById(id) {
               <div class="product-category">${product.categoryID}</div>
               <div class="product-abstract">${product.abstract}</div>
               <div class="product-price">${product.price}</div>
+              <div data-item-id="${product.itemID}" class="product-delete">
+              <img src="/images/delete.svg">
+              </div>
               
             </div>
           </div>
@@ -370,28 +333,32 @@ export function getItemById(id) {
       overlay.innerHTML = html;
       newDiv = overlay.querySelector(".single-component");
       document.body.appendChild(overlay);
+
+      document.querySelector(".product-delete").addEventListener("click", function (event) {
+        const itemID = event.currentTarget.getAttribute("data-item-id");
+        deleteItem(itemID);});
     } else {
       console.error("Error fetching item:", xhr.status);
     }
   };
   xhr.send();
 }
-const productsContainer = document.querySelector(".products-card-container");
+let productsContainer = document.querySelector(".products-card-container");
 productsContainer.addEventListener("click", function(event) {
   // Check if the clicked element is a product card
-  const productCard = event.target.closest(".products-card");
+  let productCard = event.target.closest(".products-card");
   if (productCard) {
     // Get the id of the clicked product card from the product-id class
-    const productId = productCard.querySelector(".product-id").textContent;
+    let productId = productCard.querySelector(".product-id").textContent;
     // Call the getItemById function with the productId
     getItemById(productId);
   }
 });
 let filterContainer = document.querySelector('.products-card-filter');
 filterContainer.addEventListener('click', (event) =>{
-  const productCard = event.target.closest(".products-card");
+  let productCard = event.target.closest(".products-card");
   if (productCard){
-    const productId = productCard.querySelector(".product-id").textContent;
+    let productId = productCard.querySelector(".product-id").textContent;
     // Call the getItemById function with the productId
     getItemById(productId);
   }
@@ -482,7 +449,9 @@ document.addEventListener("DOMContentLoaded", () => {
   arrowRight.addEventListener("click", handleArrowRightClick);
 
   // Initialize the first page
-  getPagedItems(1, 7, ".products-card-container");
+  getPagedItems(1, 7, ".products-card-container", null);
+  // nije dobra praksa, treba menjati
+  getPagedItems(1, 7, ".products-card-filter", null);
 });
 
 let currentPage = 1;
@@ -525,7 +494,7 @@ function changePage(newPage) {
     .classList.add("active");
 
   // Fetch the items for the new page
-  getPagedItems(currentPage, 7, ".products-card-container");
+  getPagedItems(currentPage, 7, ".products-card-container", null);
 }
 
 
