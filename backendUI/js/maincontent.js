@@ -282,6 +282,7 @@ export function deleteItem(itemID) {
   xhr.onload = function () {
     if (xhr.status === 200) {
       console.log("Item deleted successfully");
+      location.reload();
       // Refresh the list of items or close the single display
     } else {
       console.error("Error deleting item:", xhr.status);
@@ -336,7 +337,10 @@ export function getItemById(id) {
 
       document.querySelector(".product-delete").addEventListener("click", function (event) {
         const itemID = event.currentTarget.getAttribute("data-item-id");
-        deleteItem(itemID);});
+        if (confirm("Are you sure you want to delete this item?")) {
+          deleteItem(itemID);
+        }
+      });
     } else {
       console.error("Error fetching item:", xhr.status);
     }
