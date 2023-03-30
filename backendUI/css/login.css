@@ -122,6 +122,14 @@
     border: none;
     text-align: center;
   }
+  .inner-form-bot-button:hover{
+    background-color: #0e2d31;
+    transition: background-color 0.5s ease-in-out;
+  }
+  .inner-form-bot-button:hover:not(:focus) {
+    transition: background-color 0.5s ease-out;
+    background-color: #1a535c;
+  }
   .inner-form-bot-button-text {
     margin: 9px;
   }

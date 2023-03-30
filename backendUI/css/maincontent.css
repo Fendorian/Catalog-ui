@@ -94,6 +94,14 @@ input[type="text"] ::placeholder {
   padding: 15px 0;
   position: relative;
 }
+.products-card:hover {
+  background-color:#e59400;
+  transition: background-color 0.5s ease-in-out;
+}
+.products-card:hover:not(:focus) {
+  transition: background-color 0.5s ease-out;
+  background-color: #e59400;
+}
 .product-name {
   color: white;
 }
