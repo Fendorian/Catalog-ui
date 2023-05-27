@@ -19,6 +19,8 @@ function createItem() {
   const price = document.getElementById("CreatePrice").value;
   const categoryID = document.getElementById("CreateCategoryID").value;
   const imageUrl = document.getElementById("CreateImageUrl").value;
+  const specIDs = document.getElementById("CreateSpecIDs").value.split(",");
+  const values = document.getElementById("CreateValues").value.split(",");
 
   const product = new Product(
     itemID,
@@ -27,7 +29,9 @@ function createItem() {
     desc,
     price,
     categoryID,
-    imageUrl
+    imageUrl,
+    specIDs,
+    values
   );
 
   const xhr = new XMLHttpRequest();
