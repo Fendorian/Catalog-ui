@@ -85,7 +85,7 @@ input[type="text"] ::placeholder {
   cursor: pointer;
 }
 .products-card {
-  display: flex;
+  /* display: flex; */
   width: 97%;
   background-color: #ffac00;
   border-radius: 20px;

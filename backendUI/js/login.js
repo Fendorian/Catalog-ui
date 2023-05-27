@@ -7,6 +7,8 @@ const registration = document.querySelector(".inner-form-registration");
 const loginText = document.querySelector(".outer-form-login");
 const registrationText = document.querySelector(".outer-form-registration");
 
+
+
 // Combine event listeners
 document.addEventListener("DOMContentLoaded", () => {
   const cookies = document.cookie.split(';');
@@ -66,10 +68,25 @@ async function successLogin() {
         window.location.href = 'backIndex.html';
       }, 1000);
     } else if (response.status === 401) {
+      var element = document.querySelector('.inner-form-login');
+      element.classList.add('shake');
+  
+      // Remove the class after the animation completes to allow it to be re-added later
+      setTimeout(function() {
+          element.classList.remove('shake');
+      }, 1000); 
       console.log('User is not authenticated');
+      let notification = document.querySelector('.notification-container');
+        notification.style.display = "block";
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 3000)
+      
     }
   } catch (error) {
     console.error('Error:', error);
+    let notification = document.querySelector('.notification-container');
+    notification.style.display = "block";
   }
 }
 
