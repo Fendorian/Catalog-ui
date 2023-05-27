@@ -4,7 +4,7 @@ class Product {
     this.itemID = itemID;
     this.name = name;
     this.abstract = abstract;
-    this.desc - desc;
+    this.desc = desc;
     this.price = price;
     this.categoryID = categoryID;
     this.imageUrl = imageUrl;
@@ -17,17 +17,17 @@ function createItem() {
   const abstract = document.getElementById("CreateAbstract").value;
   const desc = document.getElementById("CreateDescription").value;
   const price = document.getElementById("CreatePrice").value;
-  const imageUrl = document.getElementById("CreateImageUrl").value;
   const categoryID = document.getElementById("CreateCategoryID").value;
+  const imageUrl = document.getElementById("CreateImageUrl").value;
 
   const product = new Product(
     itemID,
-    imageUrl,
     name,
-    categoryID,
-    desc,
     abstract,
-    price
+    desc,
+    price,
+    categoryID,
+    imageUrl
   );
 
   const xhr = new XMLHttpRequest();
@@ -52,7 +52,10 @@ function createItem() {
     "Content-Type, Authorization"
   );
   xhr.send(JSON.stringify(product));
+  alert('item added successfully');
 }
+
+
 
 document
   .getElementById("create-item-form")
@@ -96,3 +99,17 @@ function deleteItem(id) {
 
 //     })
 // }
+
+function logout() {
+  // Delete all cookies
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const eqPos = cookie.indexOf('=');
+    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  }
+  
+  // Redirect to index.html
+  window.location.href = 'login.html';
+}

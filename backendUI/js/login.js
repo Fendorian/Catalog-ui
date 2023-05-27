@@ -4,9 +4,24 @@ const myDiv = document.querySelector(".right-side-login");
 const leftSide = document.querySelector(".left-side");
 const login = document.querySelector(".inner-form-login");
 const registration = document.querySelector(".inner-form-registration");
+const loginText = document.querySelector(".outer-form-login");
+const registrationText = document.querySelector(".outer-form-registration");
 
 // Combine event listeners
 document.addEventListener("DOMContentLoaded", () => {
+  const cookies = document.cookie.split(';');
+  const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
+  
+  if (tokenCookie) {
+    // If a token cookie exists, parse it and check the token value
+    const tokenValue = JSON.parse(decodeURIComponent(tokenCookie.split('=')[1])).token;
+    
+    if (tokenValue) {
+      // If a token value exists, redirect to backIndex.html
+      window.location.href = 'backIndex.html';
+    }
+  }
+
   leftSide.style.transform = "translate(0%)";
   myDiv.style.opacity = 1;
   
@@ -21,7 +36,7 @@ async function successLogin() {
   const password = document.querySelector('.inner-form-bot-input[type="password"]').value;
 
   try {
-    const response = await fetch(`${url}/api/Logins/Login`, {
+    const response = await fetch(`${url}/Logins/Login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +78,9 @@ function changeFormVisibility(loginVisible) {
   registration.style.transform = loginVisible ? "scale(0.1)" : "scale(1)";
   setTimeout(() => {
     login.style.display = loginVisible ? "inline-table" : "none";
+    loginText.style.display = loginVisible ? "flex" : "none";
     registration.style.display = loginVisible ? "none" : "inline-table";
+    registrationText.style.display = loginVisible ? "none" : "flex";
   }, 500);
 }
 

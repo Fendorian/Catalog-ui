@@ -2,7 +2,20 @@ import { Product } from "./models/product.js";
 import { Category } from "./models/category.js";
 const url = `http://localhost/Catalog/api`
 
-// let threeDots = document.querySelectorAll(".three-dots-svg");
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if a token exists in the cookies
+    const cookies = document.cookie.split(';');
+    const tokenCookie = cookies.find(cookie => cookie.trim().startsWith('token='));
+    
+    if (!tokenCookie || !JSON.parse(decodeURIComponent(tokenCookie.split('=')[1])).token) {
+      // If a token does not exist, redirect to login.html
+      window.location.href = 'login.html';
+    }
+  });
+
+
+let threeDots = document.querySelectorAll(".three-dots-svg");
 let overlay = null;
 let newDiv = null;
 
@@ -59,6 +72,60 @@ export function getPagedItems(pageNumber, pageSize, containerSelector, categoryI
   xhr.send();
 }
 
+let currentPage = 1;
+let currentCategory = null;
+let totalItemsCount;
+
+// Function to initialize pagination based on total items count
+function initializePagination() {
+  let totalPages = Math.ceil(totalItemsCount / 7);
+  
+  let paginationContainer = document.querySelector('.pagination .page-numbers');
+  paginationContainer.innerHTML = '';
+  
+  for (let i = 1; i <= totalPages; i++) {
+    let pageElement = document.createElement('a');
+    pageElement.href = '#';
+    pageElement.classList.add('page-number');
+    if (i === 1) pageElement.classList.add('active');
+    pageElement.textContent = i;
+    pageElement.addEventListener('click', handlePageNumberClick);
+    paginationContainer.appendChild(pageElement);
+  }
+  
+  let arrowLeft = document.querySelector(".arrow-left");
+  let arrowRight = document.querySelector(".arrow-right");
+
+  if (totalPages <= 1) {
+    arrowLeft.style.display = "none";
+    arrowRight.style.display = "none";
+  } else {
+    arrowLeft.style.display = "";
+    arrowRight.style.display = "";
+    arrowLeft.addEventListener("click", handleArrowLeftClick);
+    arrowRight.addEventListener("click", handleArrowRightClick);
+  }
+}
+
+// Function to fetch the total items count from the backend
+function getTotalItemsCount() {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", `${url}/Products/GetTotalItemsCount`);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      totalItemsCount = parseInt(xhr.responseText);
+      initializePagination();
+      getPagedItems(currentPage, 7, ".products-card-container", currentCategory);
+    } else {
+      console.error("Error fetching total items count:", xhr.status);
+    }
+  };
+  xhr.send();
+}
+
+// Call this function once the document has loaded
+document.addEventListener("DOMContentLoaded", getTotalItemsCount);
+
 // Get all categories
 export function getAllCategories() {
   let xhr = new XMLHttpRequest();
@@ -70,19 +137,16 @@ export function getAllCategories() {
         category.CategoryID,
         category.CategoryName
       ));
+                // Reference to the existing select element
+                let selectElement = document.querySelector("#CreateCategoryID");
 
-        // Generate select element with options
-        let selectElement = document.createElement("select");
-        selectElement.setAttribute("id", "CreateCategoryID");
-        selectElement.setAttribute("name", "CreateCategoryID");
-  
-
-        categories.forEach((category) => {
-          let optionElement = document.createElement("option");
-          optionElement.setAttribute("value", category.categoryID);
-          optionElement.textContent = category.categoryName;
-          selectElement.appendChild(optionElement);
-        });
+                categories.forEach((category) => {
+                  let optionElement = document.createElement("option");
+                  optionElement.setAttribute("value", category.categoryID);
+                  optionElement.textContent = category.categoryName;
+                  selectElement.appendChild(optionElement);
+                });
+        
   
         // Insert select element before category container
         let categorySelect = document.querySelector(
@@ -116,11 +180,10 @@ export function getAllCategories() {
  console.log(cardElement);
   cardElement.addEventListener('click', () => {
     console.log(category.categoryID);
-    getPagedItems(1, 7, '.products-card-container', category.categoryID);
+    // getPagedItems(1, 7, '.products-card-container', category.categoryID);
   });
 
   categoryContainer.appendChild(cardElement);
-        categoryContainer.insertAdjacentHTML("beforeend", categoryCard);
       });
     } else {
       console.error("Error fetching items:", xhr.status);
@@ -403,7 +466,7 @@ addProductButton.addEventListener("click", () => {
   if (productComponentForm.classList.contains("hidden")) {
     productComponentForm.classList.remove("hidden");
     productComponentForm.style.transition = "height 0.5s ease-in-out";
-    productComponentForm.style.height = "100%";
+    productComponentForm.style.height = "60%";
   } else {
     productComponentForm.style.height = "0";
     setTimeout(() => {
@@ -416,7 +479,7 @@ addCategoryButton.addEventListener("click", () => {
   if (categoryComponentForm.classList.contains("hidden")) {
     categoryComponentForm.classList.remove("hidden");
     categoryComponentForm.style.transition = "height 0.5s ease-in-out";
-    categoryComponentForm.style.height = "100%";
+    categoryComponentForm.style.height = "60%";
   } else {
     categoryComponentForm.style.height = "0";
     setTimeout(() => {
@@ -428,7 +491,7 @@ cancelButton.addEventListener("click", () => {
   if (productComponentForm.classList.contains("hidden")) {
     productComponentForm.classList.remove("hidden");
     productComponentForm.style.transition = "height 0.5s ease-in-out";
-    productComponentForm.style.height = "100%";
+    productComponentForm.style.height = "60%";
     console.log('radi1');
   } else {
     productComponentForm.style.height = "0";
@@ -440,8 +503,10 @@ cancelButton.addEventListener("click", () => {
 });
 
 
+
 // Pagination
 document.addEventListener("DOMContentLoaded", () => {
+  
   const pageNumberLinks = document.querySelectorAll(".page-number");
   const arrowLeft = document.querySelector(".arrow-left");
   const arrowRight = document.querySelector(".arrow-right");
@@ -458,8 +523,6 @@ document.addEventListener("DOMContentLoaded", () => {
   getPagedItems(1, 7, ".products-card-filter", null);
 });
 
-let currentPage = 1;
-let currentCategory = null;
 
 function handlePageNumberClick(event) {
   event.preventDefault();
@@ -571,3 +634,4 @@ export function getCategoryById(categoryID) {
 // getCategoryById(9);
 
 let categorySelect = document.getElementById('CreateCategoryID');
+
