@@ -630,7 +630,7 @@ addProductButton.addEventListener("click", () => {
   if (productComponentForm.classList.contains("hidden")) {
     productComponentForm.classList.remove("hidden");
     productComponentForm.style.transition = "height 0.5s ease-in-out";
-    productComponentForm.style.height = "60%";
+    productComponentForm.style.height = "100%";
   } else {
     productComponentForm.style.height = "0";
     setTimeout(() => {
@@ -643,7 +643,7 @@ addCategoryButton.addEventListener("click", () => {
   if (categoryComponentForm.classList.contains("hidden")) {
     categoryComponentForm.classList.remove("hidden");
     categoryComponentForm.style.transition = "height 0.5s ease-in-out";
-    categoryComponentForm.style.height = "60%";
+    categoryComponentForm.style.height = "100%";
   } else {
     categoryComponentForm.style.height = "0";
     setTimeout(() => {
@@ -655,7 +655,7 @@ cancelButton.addEventListener("click", () => {
   if (productComponentForm.classList.contains("hidden")) {
     productComponentForm.classList.remove("hidden");
     productComponentForm.style.transition = "height 0.5s ease-in-out";
-    productComponentForm.style.height = "60%";
+    productComponentForm.style.height = "100%";
     console.log('radi1');
   } else {
     productComponentForm.style.height = "0";

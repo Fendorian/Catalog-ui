@@ -110,49 +110,33 @@
             </div>
           </div>
           <div id="create-item-form" class="product-component-form hidden">
-            <input type="text" name="" id="CreateID" style="display: none" />
             <label for="CreateName">Name</label>
-            <input
-              placeholder="Enter name here..."
-              id="CreateName"
-              type="text"
-            />
+            <input value="testname" id="CreateName" type="text" placeholder="Enter name here..." />
+                
             <label for="CreateAbstract">Abstract</label>
-            <input
-              value="testAbstract"
-              placeholder="Enter abstract here..."
-              type="text"
-              id="CreateAbstract"
-            />
-            <label for="CreateDescription">Enter description here</label>
-            <input value="testDescription" type="text" id="CreateDescription" />
-            <label for="CreatePrice">Enter price here</label>
-            <input
-              value="123"
-              placeholder="Enter price here..."
-              type="number"
-              id="CreatePrice"
-            />
-            <label for="CreateImageUrl">Enter Image Url here</label>
-            <input
-              placeholder="Enter url here..."
-              type="text"
-              id="CreateImageUrl"
-            />
-            <label for="CreateSpecIDs">Enter Spec IDs (comma separated)</label>
-            <input type="text" id="CreateSpecIDs" />
-            <label for="CreateValues">Enter Values (comma separated)</label>
-            <input type="text" id="CreateValues" />
-
-            <label for="CreateCategoryID">Pick category:</label>
-            <select id="CreateCategoryID" name="CreateCategoryID"></select>
+            <input value="testabstract" id="CreateAbstract" type="text" placeholder="Enter abstract here..." />
+                
+            <label for="CreateDescription">Description</label>
+            <input value="testdesc" id="CreateDescription" type="text" />
+                
+            <label for="CreatePrice">Price</label>
+            <input value="333" id="CreatePrice" type="number" placeholder="Enter price here..." />
+                
+            <label for="CreateImageUrl">Image Url</label>
+            <input value="testiamge" id="CreateImageUrl" type="text" placeholder="Enter url here..." />
+                
+            <label for="CreateCategoryID">Category</label>
+            <select id="CreateCategoryID" name="CreateCategoryID" onchange="handleCategoryChange()"></select>
+                
+            <div id="categorySpecificInputs"></div>
+          
             <div class="button-wrapper">
-              <div class="submit-adding-product" onclick="createItem();">
-                Add Product
-              </div>
+              <button id="createItemButton" class="submit-adding-product">Add Product</button>
               <div class="cancel-button">Cancel</div>
             </div>
           </div>
+          
+          
 
           <div id="edit-item-form" class="product-component-form hidden">
             <input type="text" name="" id="EditID" style="display: none" />
